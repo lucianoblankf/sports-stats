@@ -1,4 +1,4 @@
-# Graficos (ggplot2)
+# Plots (ggplot2)
 
 plot_hist_ratio <- function(data) {
   m <- mean(data$goals_xg)
@@ -14,8 +14,8 @@ plot_hist_ratio <- function(data) {
     ggplot2::geom_vline(xintercept = m, linetype = "dotted") +
     ggplot2::geom_vline(xintercept = md, linetype = "dotdash") +
     ggplot2::labs(
-      x = "Gols / xG", y = "Densidade",
-      subtitle = "Vermelha: razao = 1 | pontilhada: media | ponto-traco: mediana | tracejada: normal ajustada"
+      x = "Goals / xG", y = "Density",
+      subtitle = "Red: ratio = 1 | dotted: mean | dot-dash: median | dashed: fitted normal"
     )
 }
 
@@ -23,14 +23,14 @@ plot_qq_ratio <- function(data) {
   ggplot2::ggplot(data, ggplot2::aes(sample = goals_xg)) +
     ggplot2::stat_qq(alpha = 0.5) +
     ggplot2::stat_qq_line(color = "red") +
-    ggplot2::labs(x = "Quantis teoricos (normal)", y = "Quantis amostrais")
+    ggplot2::labs(x = "Theoretical quantiles (normal)", y = "Sample quantiles")
 }
 
 plot_box_ratio <- function(data, group_var, rotate = FALSE) {
   p <- ggplot2::ggplot(data, ggplot2::aes(.data[[group_var]], goals_xg)) +
     ggplot2::geom_boxplot(fill = "grey90") +
     ggplot2::geom_hline(yintercept = 1, color = "red", linetype = "dashed") +
-    ggplot2::labs(x = NULL, y = "Gols / xG")
+    ggplot2::labs(x = NULL, y = "Goals / xG")
   if (rotate) {
     p <- p + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
   }
@@ -42,12 +42,12 @@ plot_scatter_xg_goals <- function(data) {
     ggplot2::geom_point(alpha = 0.5) +
     ggplot2::geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "red") +
     ggplot2::geom_smooth(method = "lm", se = TRUE, color = "black", formula = y ~ x) +
-    ggplot2::labs(x = "xG na temporada", y = "Gols na temporada")
+    ggplot2::labs(x = "Season xG", y = "Season goals")
 }
 
-# Graficos de ajuste de distribuicoes (fitdistrplus usa graficos base R)
+# Distribution fit plots (fitdistrplus uses base R graphics)
 save_fit_plots <- function(fits, x, tag) {
-  grDevices::png(file.path("figs", paste0("ajuste_", tag, ".png")),
+  grDevices::png(file.path("figs", paste0("fit_plots_", tag, ".png")),
                  width = 9, height = 7, units = "in", res = 300)
   old_par <- graphics::par(mfrow = c(2, 2))
   fitdistrplus::denscomp(fits, legendtext = names(fits))
@@ -61,5 +61,5 @@ save_fit_plots <- function(fits, x, tag) {
                  width = 6, height = 5, units = "in", res = 300)
   fitdistrplus::descdist(x, boot = 500)
   grDevices::dev.off()
-  cli::cli_alert_success("Figuras de ajuste salvas ({tag})")
+  cli::cli_alert_success("Distribution fit figures saved ({tag})")
 }

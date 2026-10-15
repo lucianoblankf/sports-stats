@@ -1,0 +1,30 @@
+
+\begin{table}
+\begin{center}
+\begin{tabular}{l c c c c}
+\toprule
+ & (1) goals/xG & (2) + shots/90, minutes & (3) league FE & (4) league + season FE \\
+\midrule
+(Intercept)             & $0.97^{***}$ & $0.75^{***}$  &               &               \\
+                        & $(0.01)$     & $(0.04)$      &               &               \\
+xg                      & $0.00$       & $-0.01^{***}$ & $-0.01^{***}$ & $-0.01^{***}$ \\
+                        & $(0.00)$     & $(0.00)$      & $(0.00)$      & $(0.00)$      \\
+shots\_90               &              & $0.04^{***}$  & $0.03^{**}$   & $0.03^{*}$    \\
+                        &              & $(0.01)$      & $(0.01)$      & $(0.01)$      \\
+time                    &              & $0.00^{***}$  & $0.00^{***}$  & $0.00^{***}$  \\
+                        &              & $(0.00)$      & $(0.00)$      & $(0.00)$      \\
+\midrule
+Num. obs.               & $2871$       & $2871$        & $2871$        & $2871$        \\
+R$^2$ (full model)      & $0.00$       & $0.03$        & $0.04$        & $0.06$        \\
+R$^2$ (proj model)      & $$           & $$            & $0.03$        & $0.03$        \\
+Adj. R$^2$ (full model) & $0.00$       & $0.03$        & $0.04$        & $0.05$        \\
+Adj. R$^2$ (proj model) & $$           & $$            & $0.03$        & $0.03$        \\
+Num. groups: league     & $$           & $$            & $6$           & $6$           \\
+Num. groups: season     & $$           & $$            & $$            & $11$          \\
+\bottomrule
+\multicolumn{5}{l}{\scriptsize{$^{***}p<0.001$; $^{**}p<0.01$; $^{*}p<0.05$}}
+\end{tabular}
+\caption{Determinants of the goals/xG ratio (forwards with xG $\geq$ 5)}
+\label{tab:reg_ratio_xgmin5}
+\end{center}
+\end{table}

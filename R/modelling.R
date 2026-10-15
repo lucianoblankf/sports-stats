@@ -1,24 +1,24 @@
-# Modelos multivariados (regressao com efeitos fixos) e clusters
+# Multivariate models (fixed-effects regression) and clusters
 
-# Regressoes de gols/xG e de gols, com efeitos fixos de liga e temporada
-# e erros-padrao clusterizados por jogador
+# Regressions of goals/xG and goals, with league and season fixed effects
+# and standard errors clustered by player
 fit_ratio_models <- function(data) {
   list(
-    "(1) gols/xG" = fixest::feols(goals_xg ~ xg, data = data, cluster = ~id),
-    "(2) + chutes/90, minutos" = fixest::feols(
+    "(1) goals/xG" = fixest::feols(goals_xg ~ xg, data = data, cluster = ~id),
+    "(2) + shots/90, minutes" = fixest::feols(
       goals_xg ~ xg + shots_90 + time, data = data, cluster = ~id),
-    "(3) EF liga" = fixest::feols(
+    "(3) league FE" = fixest::feols(
       goals_xg ~ xg + shots_90 + time | league, data = data, cluster = ~id),
-    "(4) EF liga + temporada" = fixest::feols(
+    "(4) league + season FE" = fixest::feols(
       goals_xg ~ xg + shots_90 + time | league + season, data = data, cluster = ~id)
   )
 }
 
 fit_calibration_models <- function(data) {
   list(
-    "(1) gols" = fixest::feols(goals ~ xg, data = data, cluster = ~id),
-    "(2) EF liga" = fixest::feols(goals ~ xg | league, data = data, cluster = ~id),
-    "(3) EF liga + temporada" = fixest::feols(
+    "(1) goals" = fixest::feols(goals ~ xg, data = data, cluster = ~id),
+    "(2) league FE" = fixest::feols(goals ~ xg | league, data = data, cluster = ~id),
+    "(3) league + season FE" = fixest::feols(
       goals ~ xg | league + season, data = data, cluster = ~id)
   )
 }
@@ -35,10 +35,10 @@ save_texreg <- function(models, name, caption) {
   texreg::htmlreg(models, file = file.path("tabs", paste0(name, ".html")),
                   caption = caption)
   readr::write_rds(tidy_models(models), file.path("tabs", paste0(name, ".rds")))
-  cli::cli_alert_success("Tabela de modelos salva: {.file tabs/{name}}")
+  cli::cli_alert_success("Model table saved: {.file tabs/{name}}")
 }
 
-# k-means sobre o perfil de finalizacao (variaveis padronizadas)
+# k-means on the finishing profile (standardised variables)
 cluster_profile_vars <- c("goals_xg", "xg_90", "shots_90", "key_passes_90", "xa_90")
 
 choose_k <- function(scaled, k_range = 2:6) {

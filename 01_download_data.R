@@ -1,4 +1,4 @@
-# 01 - Baixa a base agregada do Understat (jogador x temporada) para data/raw
+# 01 - Download the aggregated Understat data (player x season) to data/raw
 
 purrr::walk(list.files("R", pattern = "\\.R$", full.names = TRUE), source)
 ensure_dirs()
@@ -7,9 +7,9 @@ url <- "https://raw.githubusercontent.com/vibedatascience/understat_players_aggr
 raw_path <- "data/raw/understat.csv"
 
 if (file.exists(raw_path)) {
-  cli::cli_alert_info("{.file {raw_path}} ja existe; download ignorado (dados brutos sao somente leitura).")
+  cli::cli_alert_info("{.file {raw_path}} already exists; skipping download (raw data is read-only).")
 } else {
-  cli::cli_alert_info("Baixando dados do Understat...")
+  cli::cli_alert_info("Downloading Understat data...")
   utils::download.file(url, raw_path, mode = "wb")
-  cli::cli_alert_success("Dados salvos em {.file {raw_path}}")
+  cli::cli_alert_success("Data saved to {.file {raw_path}}")
 }

@@ -1,4 +1,4 @@
-# Executa todo o pipeline na ordem. Rodar dentro do projeto (Metodos_Estatisticos.Rproj).
+# Runs the whole pipeline in order. Run inside the project (Metodos_Estatisticos.Rproj).
 
 scripts <- c(
   "01_download_data.R",
@@ -15,4 +15,4 @@ for (script in scripts) {
   source(script)
 }
 
-cli::cli_alert_success("Pipeline concluido. Veja tabs/ e figs/.")
+cli::cli_alert_success("Pipeline finished. See tabs/ and figs/.")

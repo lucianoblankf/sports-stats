@@ -1,4 +1,4 @@
-# Estatisticas descritivas
+# Descriptive statistics
 
 describe_var <- function(x) {
   q <- as.numeric(stats::quantile(x, c(0.25, 0.75)))
@@ -25,13 +25,13 @@ describe_vars <- function(data, vars) {
     dplyr::bind_rows()
 }
 
-# Maiores e menores razoes gols/xG
+# Highest and lowest goals/xG ratios
 extreme_players <- function(data, n = 10) {
   dplyr::bind_rows(
     data |> dplyr::arrange(dplyr::desc(goals_xg)) |>
-      dplyr::slice_head(n = n) |> dplyr::mutate(type = "Maiores"),
+      dplyr::slice_head(n = n) |> dplyr::mutate(type = "Highest"),
     data |> dplyr::arrange(goals_xg) |>
-      dplyr::slice_head(n = n) |> dplyr::mutate(type = "Menores")
+      dplyr::slice_head(n = n) |> dplyr::mutate(type = "Lowest")
   ) |>
     dplyr::select(type, player_name, season, team_title, league, goals, xg, goals_xg)
 }

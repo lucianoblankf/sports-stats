@@ -1,0 +1,14 @@
+h0,h1,test,statistic,p_value
+Mean goals/xG equals 1,Mean differs from 1,One Sample t-test,10.623672971541302,1.719494766446283e-20
+Median goals/xG equals 1,Median differs from 1,Wilcoxon signed rank test with continuity correction,12640,0
+Mean (goals minus xG) equals 0,Mean differs from 0,Paired t-test,10.04804423059109,6.745766490505378e-19
+Median (goals minus xG) equals 0,Median differs from 0,Wilcoxon signed rank test with continuity correction,12430,2.220446049250313e-16
+Share of forwards with goals above xG equals 0.5,Share differs from 0.5,Exact binomial test,129,4.035970758311862e-12
+Pearson correlation between xG and goals equals 0,Correlation differs from 0,Pearson's product-moment correlation,16.693978202114902,1.9634911895073004e-37
+Spearman correlation between xG and goals equals 0,Correlation differs from 0,Spearman's rank correlation rho,206249.87414405748,5.256771254588452e-31
+Mean goals/xG is equal across leagues,At least one league differs,One-way analysis of means (not assuming equal variances),1.7381729014217258,0.15255642712578216
+Goals/xG distribution is equal across leagues,At least one league differs,Kruskal-Wallis rank sum test,7.987434692171632,0.15692948728776163
+Goals/xG variances are equal across leagues,At least one league differs,Fligner-Killeen test of homogeneity of variances,0.6187806573926337,0.9871272222632048
+Goals/xG distribution is equal across seasons,At least one season differs,Kruskal-Wallis rank sum test,15.391258033749864,0.11843501722762363
+xG coefficient in the goals regression equals 1,Coefficient differs from 1,t-test for the coefficient,-5.568826549678109,1.0063287788155697e-7
+Mean goals/xG equals 1 (one value per player),Mean differs from 1,One Sample t-test,9.433884726803662,8.851587852099247e-15

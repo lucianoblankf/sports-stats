@@ -1,27 +1,27 @@
-# Metodos Estatisticos: gols vs xG de atacantes
+# Sports stats: goals vs xG of forwards
 
-Analise da razao gols/xG de atacantes (Understat, 2014/15 a 2024/25) para a disciplina de Metodos Estatisticos do mestrado.
+Analysis of the goals/xG ratio of forwards (Understat, 2014/15 to 2024/25), originally built for a Statistical Methods course in a master's program.
 
-## Como rodar
+## How to run
 
-Abrir `Metodos_Estatisticos.Rproj` no RStudio e executar `00_run_all.R` (ou cada script na ordem).
+Open `Metodos_Estatisticos.Rproj` in RStudio and run `00_run_all.R` (or each script in order).
 
-| Script | O que faz |
+| Script | What it does |
 |---|---|
-| `01_download_data.R` | baixa a base bruta para `data/raw/` |
-| `02_prepare_data.R` | limpa (`janitor`) e cria as bases de atacantes (>= 10 e >= 20 gols) |
-| `03_descriptive.R` | descritivas e figuras |
-| `04_tests_distribution.R` | normalidade, ajuste de distribuicoes, testes de hipotese, bootstrap |
-| `05_selection_bias.R` | corte por gols minimos vs xG minimo + simulacao do vies |
-| `06_regression.R` | regressoes com efeitos fixos (`fixest`, tabelas `texreg`) |
-| `07_clusters.R` | perfis de finalizacao via k-means |
+| `01_download_data.R` | downloads the raw data to `data/raw/` |
+| `02_prepare_data.R` | cleans the data (`janitor`) and builds the forward datasets (>= 10 and >= 20 goals) |
+| `03_descriptive.R` | descriptive statistics and figures |
+| `04_tests_distribution.R` | normality, distribution fitting, hypothesis tests, bootstrap |
+| `05_selection_bias.R` | minimum-goals vs minimum-xG cutoffs, plus a bias simulation |
+| `06_regression.R` | fixed-effects regressions (`fixest`, `texreg` tables) |
+| `07_clusters.R` | finishing profiles via k-means |
 
-Funcoes reutilizaveis ficam em `R/`. Saidas em `tabs/` e `figs/`. Codigo antigo em `legacy/`.
+Reusable functions live in `R/`. Outputs go to `tabs/` and `figs/`. Old code is kept in `legacy/` (original Portuguese version), and the original course materials are in `docs/`.
 
-## Principais resultados
+## Main results
 
-- Base g10 (n = 1139): media gols/xG = 1,156, mediana 1,122, assimetria 1,17 (reproduz o roteiro).
-- Com corte por **xG minimo** (nao enviesa pelo resultado) a media cai para ~0,99 e deixa de ser diferente de 1 (xG >= 5: p = 0,16). O "1,16" vem do vies de selecao.
-- Simulacao com gols ~ Poisson(xG), sem nenhuma habilidade: o corte de 10 gols ja produz razao media ~1,22.
-- Regressao de calibracao (xG >= 5): coeficiente de xG ~ 1,03, R2 ~ 0,78, estavel com efeitos fixos de liga e temporada.
-- Clusters: k = 2 pela silhueta (0,29), separacao fraca; o principal eixo e criacao de jogadas (passes-chave, xA).
+- g10 dataset (n = 1139): mean goals/xG = 1.156, median 1.122, skewness 1.17.
+- With a **minimum-xG** cutoff (which does not select on the outcome) the mean drops to about 0.99 and is no longer different from 1 (xG >= 5: p = 0.16). The "1.16" comes from selection bias.
+- Simulation with goals ~ Poisson(xG), i.e. no skill at all: the 10-goal cutoff alone already produces a mean ratio of about 1.22.
+- Calibration regression (xG >= 5): xG coefficient of about 1.03, R2 of about 0.78, stable with league and season fixed effects.
+- Clusters: k = 2 by silhouette (0.29), weak separation; the main axis is chance creation (key passes, xA).

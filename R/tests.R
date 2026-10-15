@@ -1,4 +1,4 @@
-# Testes de normalidade, ajuste de distribuicoes e testes de hipotese
+# Normality tests, distribution fitting and hypothesis tests
 
 normality_tests <- function(x, name) {
   tibble::tibble(
@@ -38,7 +38,7 @@ fit_parameters <- function(fits) {
     dplyr::bind_rows(.id = "distribution")
 }
 
-# Uma linha da tabela de testes: H0, H1 e resultado de um objeto htest
+# One row of the test table: H0, H1 and the result of an htest object
 htest_row <- function(h0, h1, res) {
   tibble::tibble(
     h0 = h0, h1 = h1, test = res$method,
@@ -48,61 +48,67 @@ htest_row <- function(h0, h1, res) {
 
 run_hypothesis_tests <- function(data) {
   tests <- dplyr::bind_rows(
-    htest_row("Media de gols/xG igual a 1", "Media diferente de 1",
+    htest_row("Mean goals/xG equals 1", "Mean differs from 1",
               stats::t.test(data$goals_xg, mu = 1)),
-    htest_row("Mediana de gols/xG igual a 1", "Mediana diferente de 1",
+    htest_row("Median goals/xG equals 1", "Median differs from 1",
               stats::wilcox.test(data$goals_xg, mu = 1)),
-    htest_row("Media de (gols menos xG) igual a 0", "Media diferente de 0",
+    htest_row("Mean (goals minus xG) equals 0", "Mean differs from 0",
               stats::t.test(data$goals, data$xg, paired = TRUE)),
-    htest_row("Mediana de (gols menos xG) igual a 0", "Mediana diferente de 0",
+    htest_row("Median (goals minus xG) equals 0", "Median differs from 0",
               stats::wilcox.test(data$goals, data$xg, paired = TRUE)),
-    htest_row("Proporcao de atacantes com gols acima do xG igual a 0,5",
-              "Proporcao diferente de 0,5",
+    htest_row("Share of forwards with goals above xG equals 0.5",
+              "Share differs from 0.5",
               stats::binom.test(sum(data$goals > data$xg), nrow(data), p = 0.5)),
-    htest_row("Correlacao de Pearson entre xG e gols igual a 0", "Correlacao diferente de 0",
+    htest_row("Pearson correlation between xG and goals equals 0",
+              "Correlation differs from 0",
               stats::cor.test(data$xg, data$goals)),
-    htest_row("Correlacao de Spearman entre xG e gols igual a 0", "Correlacao diferente de 0",
+    htest_row("Spearman correlation between xG and goals equals 0",
+              "Correlation differs from 0",
               stats::cor.test(data$xg, data$goals, method = "spearman", exact = FALSE)),
-    htest_row("Medias de gols/xG iguais entre as ligas", "Ao menos uma liga difere",
+    htest_row("Mean goals/xG is equal across leagues", "At least one league differs",
               stats::oneway.test(goals_xg ~ league, data = data)),
-    htest_row("Distribuicao de gols/xG igual entre as ligas", "Ao menos uma liga difere",
+    htest_row("Goals/xG distribution is equal across leagues",
+              "At least one league differs",
               stats::kruskal.test(goals_xg ~ league, data = data)),
-    htest_row("Variancias de gols/xG iguais entre as ligas", "Ao menos uma liga difere",
+    htest_row("Goals/xG variances are equal across leagues",
+              "At least one league differs",
               stats::fligner.test(goals_xg ~ league, data = data)),
-    htest_row("Distribuicao de gols/xG igual entre as temporadas",
-              "Ao menos uma temporada difere",
+    htest_row("Goals/xG distribution is equal across seasons",
+              "At least one season differs",
               stats::kruskal.test(goals_xg ~ season, data = data))
   )
 
-  # inclinacao da regressao gols ~ xG igual a 1 (xG "calibrado")
-  cf <- stats::coef(summary(stats::lm(goals ~ xg, data = data)))
-  dof <- stats::df.residual(stats::lm(goals ~ xg, data = data))
+  # slope of the goals ~ xG regression equals 1 (calibrated xG)
+  calib_model <- stats::lm(goals ~ xg, data = data)
+  cf <- stats::coef(summary(calib_model))
   t_b1 <- (cf["xg", "Estimate"] - 1) / cf["xg", "Std. Error"]
   tests <- dplyr::bind_rows(tests, tibble::tibble(
-    h0 = "Coeficiente de xG na regressao de gols igual a 1",
-    h1 = "Coeficiente diferente de 1",
-    test = "Teste t para o coeficiente",
-    statistic = unname(t_b1), p_value = unname(2 * stats::pt(-abs(t_b1), df = dof))
+    h0 = "xG coefficient in the goals regression equals 1",
+    h1 = "Coefficient differs from 1",
+    test = "t-test for the coefficient",
+    statistic = unname(t_b1),
+    p_value = unname(2 * stats::pt(-abs(t_b1), df = stats::df.residual(calib_model)))
   ))
 
-  # 10-19 gols vs 20+ gols (so faz sentido quando ha os dois grupos)
+  # 10-19 goals vs 20+ goals (only meaningful when both groups exist)
   if (dplyr::n_distinct(data$group_goals) == 2) {
     tests <- dplyr::bind_rows(
       tests,
-      htest_row("Media de gols/xG igual entre os grupos 10-19 e 20+ gols", "Medias diferentes",
+      htest_row("Mean goals/xG is equal between the 10-19 and 20+ goals groups",
+                "Means differ",
                 stats::t.test(goals_xg ~ group_goals, data = data)),
-      htest_row("Distribuicao de gols/xG igual entre os grupos 10-19 e 20+ gols",
-                "Distribuicoes diferentes",
+      htest_row("Goals/xG distribution is equal between the 10-19 and 20+ goals groups",
+                "Distributions differ",
                 stats::wilcox.test(goals_xg ~ group_goals, data = data))
     )
   }
 
-  # sensibilidade: um valor por jogador (media das temporadas)
+  # sensitivity check: one value per player (mean across seasons)
   per_player <- data |>
     dplyr::summarise(goals_xg = mean(goals_xg), .by = id)
   dplyr::bind_rows(
     tests,
-    htest_row("Media de gols/xG igual a 1 (um valor por jogador)", "Media diferente de 1",
+    htest_row("Mean goals/xG equals 1 (one value per player)", "Mean differs from 1",
               stats::t.test(per_player$goals_xg, mu = 1))
   )
 }

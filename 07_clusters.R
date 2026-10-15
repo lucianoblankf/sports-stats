@@ -1,4 +1,4 @@
-# 07 - Perfis de finalizacao via k-means (amostra xG >= 5)
+# 07 - Finishing profiles via k-means (sample xG >= 5)
 
 purrr::walk(list.files("R", pattern = "\\.R$", full.names = TRUE), source)
 ensure_dirs()
@@ -14,9 +14,9 @@ scaled <- base_xg |>
   scale()
 
 k_tab <- choose_k(scaled)
-save_tab(k_tab, "cluster_escolha_k", "Escolha do numero de clusters (silhueta media)")
+save_tab(k_tab, "cluster_choice_k", "Choice of the number of clusters (mean silhouette)")
 best_k <- k_tab$k[which.max(k_tab$avg_silhouette)]
-cli::cli_alert_info("k escolhido pela silhueta media: {best_k}")
+cli::cli_alert_info("k chosen by mean silhouette: {best_k}")
 
 km <- stats::kmeans(scaled, centers = best_k, nstart = 25)
 base_xg <- base_xg |>
@@ -29,6 +29,6 @@ profile <- base_xg |>
     .by = cluster
   ) |>
   dplyr::arrange(cluster)
-save_tab(profile, "cluster_perfis", "Perfil medio dos clusters de atacantes")
+save_tab(profile, "cluster_profiles", "Mean profile of forward clusters")
 save_fig(plot_clusters_pca(base_xg, scaled), "cluster_pca")
 readr::write_rds(base_xg, "data/processed/forwards_xgmin5_clusters.rds")
