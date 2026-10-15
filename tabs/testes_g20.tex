@@ -1,0 +1,26 @@
+\begin{table}
+
+\caption{\label{tab:testes_g20}Testes de hipoteses}
+\centering
+\begin{tabular}[t]{lllrl}
+\toprule
+h0 & h1 & test & statistic & p\_value\\
+\midrule
+Media de gols/xG igual a 1 & Media diferente de 1 & One Sample t-test & 10.624 & <1e-04\\
+Mediana de gols/xG igual a 1 & Mediana diferente de 1 & Wilcoxon signed rank test with continuity correction & 12640.000 & <1e-04\\
+Media de (gols menos xG) igual a 0 & Media diferente de 0 & Paired t-test & 10.048 & <1e-04\\
+Mediana de (gols menos xG) igual a 0 & Mediana diferente de 0 & Wilcoxon signed rank test with continuity correction & 12430.000 & <1e-04\\
+Proporcao de atacantes com gols acima do xG igual a 0,5 & Proporcao diferente de 0,5 & Exact binomial test & 129.000 & <1e-04\\
+\addlinespace
+Correlacao de Pearson entre xG e gols igual a 0 & Correlacao diferente de 0 & Pearson's product-moment correlation & 16.694 & <1e-04\\
+Correlacao de Spearman entre xG e gols igual a 0 & Correlacao diferente de 0 & Spearman's rank correlation rho & 206249.874 & <1e-04\\
+Medias de gols/xG iguais entre as ligas & Ao menos uma liga difere & One-way analysis of means (not assuming equal variances) & 1.738 & 0.153\\
+Distribuicao de gols/xG igual entre as ligas & Ao menos uma liga difere & Kruskal-Wallis rank sum test & 7.987 & 0.157\\
+Variancias de gols/xG iguais entre as ligas & Ao menos uma liga difere & Fligner-Killeen test of homogeneity of variances & 0.619 & 0.987\\
+\addlinespace
+Distribuicao de gols/xG igual entre as temporadas & Ao menos uma temporada difere & Kruskal-Wallis rank sum test & 15.391 & 0.118\\
+Coeficiente de xG na regressao de gols igual a 1 & Coeficiente diferente de 1 & Teste t para o coeficiente & -5.569 & <1e-04\\
+Media de gols/xG igual a 1 (um valor por jogador) & Media diferente de 1 & One Sample t-test & 9.434 & <1e-04\\
+\bottomrule
+\end{tabular}
+\end{table}

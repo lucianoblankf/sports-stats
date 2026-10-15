@@ -1,0 +1,16 @@
+h0,h1,test,statistic,p_value
+Media de gols/xG igual a 1,Media diferente de 1,One Sample t-test,19.448923183986647,5.737868155842255e-73
+Mediana de gols/xG igual a 1,Mediana diferente de 1,Wilcoxon signed rank test with continuity correction,516797,0
+Media de (gols menos xG) igual a 0,Media diferente de 0,Paired t-test,16.348008247784886,4.021932616345056e-54
+Mediana de (gols menos xG) igual a 0,Mediana diferente de 0,Wilcoxon signed rank test with continuity correction,493204,0
+"Proporcao de atacantes com gols acima do xG igual a 0,5","Proporcao diferente de 0,5",Exact binomial test,795,1.2466614533725146e-41
+Correlacao de Pearson entre xG e gols igual a 0,Correlacao diferente de 0,Pearson's product-moment correlation,56.42974868426017,0
+Correlacao de Spearman entre xG e gols igual a 0,Correlacao diferente de 0,Spearman's rank correlation rho,60549442.57516869,7.146979123019151e-210
+Medias de gols/xG iguais entre as ligas,Ao menos uma liga difere,One-way analysis of means (not assuming equal variances),2.3896528112533737,0.037241602873970214
+Distribuicao de gols/xG igual entre as ligas,Ao menos uma liga difere,Kruskal-Wallis rank sum test,14.260462641952927,0.014036887363492357
+Variancias de gols/xG iguais entre as ligas,Ao menos uma liga difere,Fligner-Killeen test of homogeneity of variances,10.44164889929082,0.06364585557549168
+Distribuicao de gols/xG igual entre as temporadas,Ao menos uma temporada difere,Kruskal-Wallis rank sum test,41.10113862755543,1.0828296107809654e-5
+Coeficiente de xG na regressao de gols igual a 1,Coeficiente diferente de 1,Teste t para o coeficiente,-9.851512926570186,4.994143869242215e-22
+Media de gols/xG igual entre os grupos 10-19 e 20+ gols,Medias diferentes,Welch Two Sample t-test,0.5365675814903861,0.5919272313061859
+Distribuicao de gols/xG igual entre os grupos 10-19 e 20+ gols,Distribuicoes diferentes,Wilcoxon rank sum test with continuity correction,78871,0.43310044868140474
+Media de gols/xG igual a 1 (um valor por jogador),Media diferente de 1,One Sample t-test,17.492918679353263,2.0163902353080315e-54

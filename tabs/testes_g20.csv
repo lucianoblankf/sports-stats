@@ -1,0 +1,14 @@
+h0,h1,test,statistic,p_value
+Media de gols/xG igual a 1,Media diferente de 1,One Sample t-test,10.623672971541302,1.719494766446283e-20
+Mediana de gols/xG igual a 1,Mediana diferente de 1,Wilcoxon signed rank test with continuity correction,12640,0
+Media de (gols menos xG) igual a 0,Media diferente de 0,Paired t-test,10.04804423059109,6.745766490505378e-19
+Mediana de (gols menos xG) igual a 0,Mediana diferente de 0,Wilcoxon signed rank test with continuity correction,12430,2.220446049250313e-16
+"Proporcao de atacantes com gols acima do xG igual a 0,5","Proporcao diferente de 0,5",Exact binomial test,129,4.035970758311862e-12
+Correlacao de Pearson entre xG e gols igual a 0,Correlacao diferente de 0,Pearson's product-moment correlation,16.693978202114902,1.9634911895073004e-37
+Correlacao de Spearman entre xG e gols igual a 0,Correlacao diferente de 0,Spearman's rank correlation rho,206249.87414405748,5.256771254588452e-31
+Medias de gols/xG iguais entre as ligas,Ao menos uma liga difere,One-way analysis of means (not assuming equal variances),1.7381729014217258,0.15255642712578216
+Distribuicao de gols/xG igual entre as ligas,Ao menos uma liga difere,Kruskal-Wallis rank sum test,7.987434692171632,0.15692948728776163
+Variancias de gols/xG iguais entre as ligas,Ao menos uma liga difere,Fligner-Killeen test of homogeneity of variances,0.6187806573926337,0.9871272222632048
+Distribuicao de gols/xG igual entre as temporadas,Ao menos uma temporada difere,Kruskal-Wallis rank sum test,15.391258033749864,0.11843501722762363
+Coeficiente de xG na regressao de gols igual a 1,Coeficiente diferente de 1,Teste t para o coeficiente,-5.568826549678109,1.0063287788155697e-7
+Media de gols/xG igual a 1 (um valor por jogador),Media diferente de 1,One Sample t-test,9.433884726803662,8.851587852099247e-15

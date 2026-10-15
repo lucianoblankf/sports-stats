@@ -1,0 +1,9 @@
+distribution,parameter,value
+normal,mean,1.1555731219644407
+normal,sd,0.2698423665489204
+lognormal,meanlog,0.11931316563336622
+lognormal,sdlog,0.22256310994540562
+gamma,shape,19.94088067548914
+gamma,rate,17.256245890936206
+weibull,shape,4.101572699026545
+weibull,scale,1.2622387515486095

@@ -1,0 +1,28 @@
+\begin{table}
+
+\caption{\label{tab:testes_g10}Testes de hipoteses}
+\centering
+\begin{tabular}[t]{lllrl}
+\toprule
+H0 & H1 & teste & estatistica & p\_valor\\
+\midrule
+Media de gols/xG igual a 1 & Media diferente de 1 & One Sample t-test & 19.449 & <1e-04\\
+Mediana de gols/xG igual a 1 & Mediana diferente de 1 & Wilcoxon signed rank test with continuity correction & 516797.000 & <1e-04\\
+Media de (gols menos xG) igual a 0 & Media diferente de 0 & Paired t-test & 16.348 & <1e-04\\
+Mediana de (gols menos xG) igual a 0 & Mediana diferente de 0 & Wilcoxon signed rank test with continuity correction & 493204.000 & <1e-04\\
+Proporcao de atacantes com gols acima do xG igual a 0,5 & Proporcao diferente de 0,5 & Exact binomial test & 795.000 & <1e-04\\
+\addlinespace
+Correlacao de Pearson entre xG e gols igual a 0 & Correlacao diferente de 0 & Pearson's product-moment correlation & 56.430 & <1e-04\\
+Correlacao de Spearman entre xG e gols igual a 0 & Correlacao diferente de 0 & Spearman's rank correlation rho & 60549442.575 & <1e-04\\
+Medias de gols/xG iguais entre as ligas & Ao menos uma liga difere & One-way analysis of means (not assuming equal variances) & 2.390 & 0.0372\\
+Distribuicao de gols/xG igual entre as ligas & Ao menos uma liga difere & Kruskal-Wallis rank sum test & 14.260 & 0.0140\\
+Variancias de gols/xG iguais entre as ligas & Ao menos uma liga difere & Fligner-Killeen test of homogeneity of variances & 10.442 & 0.0636\\
+\addlinespace
+Distribuicao de gols/xG igual entre as temporadas & Ao menos uma temporada difere & Kruskal-Wallis rank sum test & 41.101 & <1e-04\\
+Coeficiente de xG na regressao de gols igual a 1 & Coeficiente diferente de 1 & Teste t para o coeficiente & -9.852 & <1e-04\\
+Media de gols/xG igual entre os grupos 10-19 e 20+ gols & Medias diferentes & Welch Two Sample t-test & 0.537 & 0.5919\\
+Distribuicao de gols/xG igual entre os grupos 10-19 e 20+ gols & Distribuicoes diferentes & Wilcoxon rank sum test with continuity correction & 78871.000 & 0.4331\\
+Media de gols/xG igual a 1 (um valor por jogador) & Media diferente de 1 & One Sample t-test & 17.493 & <1e-04\\
+\bottomrule
+\end{tabular}
+\end{table}

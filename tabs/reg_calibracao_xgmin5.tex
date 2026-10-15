@@ -1,0 +1,26 @@
+
+\begin{table}
+\begin{center}
+\begin{tabular}{l c c c}
+\toprule
+ & (1) gols & (2) EF liga & (3) EF liga + temporada \\
+\midrule
+(Intercept)             & $-0.30^{*}$  &              &              \\
+                        & $(0.15)$     &              &              \\
+xg                      & $1.03^{***}$ & $1.03^{***}$ & $1.03^{***}$ \\
+                        & $(0.02)$     & $(0.02)$     & $(0.02)$     \\
+\midrule
+Num. obs.               & $2873$       & $2873$       & $2873$       \\
+R$^2$ (full model)      & $0.78$       & $0.78$       & $0.79$       \\
+R$^2$ (proj model)      & $$           & $0.78$       & $0.78$       \\
+Adj. R$^2$ (full model) & $0.78$       & $0.78$       & $0.78$       \\
+Adj. R$^2$ (proj model) & $$           & $0.78$       & $0.78$       \\
+Num. groups: league     & $$           & $6$          & $6$          \\
+Num. groups: season     & $$           & $$           & $12$         \\
+\bottomrule
+\multicolumn{4}{l}{\scriptsize{$^{***}p<0.001$; $^{**}p<0.01$; $^{*}p<0.05$}}
+\end{tabular}
+\caption{Calibracao do xG: gols em funcao do xG (atacantes com xG $\geq$ 5)}
+\label{tab:reg_calibracao_xgmin5}
+\end{center}
+\end{table}
