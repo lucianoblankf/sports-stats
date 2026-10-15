@@ -32,6 +32,7 @@ save_texreg <- function(models, name, caption) {
   texreg::texreg(models, file = file.path("tabs", paste0(name, ".tex")),
                  caption = caption, label = paste0("tab:", name),
                  booktabs = TRUE, dcolumn = FALSE, use.packages = FALSE)
+  shrink_wide_tabular(file.path("tabs", paste0(name, ".tex")))
   texreg::htmlreg(models, file = file.path("tabs", paste0(name, ".html")),
                   caption = caption)
   readr::write_rds(tidy_models(models), file.path("tabs", paste0(name, ".rds")))

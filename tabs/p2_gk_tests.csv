@@ -1,0 +1,7 @@
+h0,h1,test,statistic,p_value
+Elite goalkeepers: mean ga/xGA equals 1,Mean below 1,One Sample t-test,-4.307725036798234,1.2566825914868102e-5
+Elite goalkeepers: median ga/xGA equals 1,Median below 1,Wilcoxon signed rank test with continuity correction,7951,3.086216705950954e-5
+Other goalkeepers: mean ga/xGA equals 1,Mean differs from 1,One Sample t-test,-0.2953027579490864,0.7678580864597343
+Mean ga/xGA is equal for elite and other goalkeepers,Elite mean is lower,Welch Two Sample t-test,-3.5020426320943034,2.574369019735907e-4
+Distribution of ga/xGA is equal for elite and other goalkeepers,Elite distribution is lower,Wilcoxon rank sum test with continuity correction,59220,8.228246210769721e-4
+Mean xGA per match is equal for elite and other goalkeepers,Means differ,Welch Two Sample t-test,-2.0659728635278216,0.039519486999049176

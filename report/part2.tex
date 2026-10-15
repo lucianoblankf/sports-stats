@@ -1,0 +1,190 @@
+% Part 2 - Multivariate analysis. Compile with pdfLaTeX (Overleaf: upload the whole project
+% folder so that ../tabs and ../figs are available; set this file as the main document).
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{setspace}
+\onehalfspacing
+\graphicspath{{../figs/}}
+
+\title{Goals versus xG: Multivariate Analysis of Forwards and Goalkeepers\\
+\large Part 2 -- Statistical Methods}
+\author{Luciano Blank Fonseca}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Part 1 showed that the apparent over-performance of forwards (mean goals/xG of 1.16) is largely a selection artifact of filtering on goals. Part 2 asks what multivariate methods add. Using 2{,}872 forward-seasons from the five major European leagues plus the Russian league (2014/15--2024/25), I (i) regress goals on xG, shots, minutes, position, league and season; (ii) reduce seven finishing and creation metrics with principal components analysis (PCA) and build composite offensive indices; (iii) measure year-to-year persistence to separate finishing skill from luck; and (iv) test whether elite goalkeepers concede fewer goals than the expected goals against (xGA). Main findings: xG is almost perfectly calibrated (slope 1.03, $R^2=0.78$); goals/xG is only weakly persistent ($r=0.09$) while xG per 90 is highly persistent ($r=0.64$); and goalkeepers selected as elite out of sample concede about 3.8\% fewer goals than xGA, a real but modest effect.
+\end{abstract}
+
+\section{Data and sample}
+
+The data come from Understat (xG model of its own), accessed through the aggregated player-season repository used in Part 1. Two changes relative to Part 1 are made. First, players who moved clubs within a season appear in more than one row, so rows are merged by player id and season (sums of goals, xG, shots and minutes), which yields 34{,}159 player-seasons out of 37{,}237 club-level rows; 655 player-seasons involved more than one club. Second, because Part 1 showed that filtering on \emph{goals} induces selection bias, the main sample uses a cutoff on the \emph{input}: forwards (primary position F at every club) with season $\text{xG}\geq 5$. This gives 2{,}872 player-seasons for 1{,}099 players. The incomplete 2025/26 season is excluded. The goals $\geq 10$ sample (1{,}136 player-seasons) is kept as a robustness check.
+
+\input{../tabs/p2_sample_by_league.tex}
+\input{../tabs/p2_desc_stats.tex}
+
+For the goalkeeper analysis, team-season goals conceded and xGA were collected from Understat (1{,}250 team-seasons) and attributed to the goalkeeper who played at least 60\% of the team's minutes (1{,}089 team-seasons).
+
+\section{Multiple regression}
+
+\subsection{Specification}
+
+The baseline model is
+\begin{equation}
+\text{goals}_{it} = \alpha + \beta_1\,\text{xG}_{it} + \beta_2\,\text{shots}_{it} + \beta_3\,\text{minutes}_{it} + \beta_4\,\text{midfield}_{it} + \gamma_{\ell} + \delta_t + \varepsilon_{it},
+\end{equation}
+where $\text{midfield}_{it}$ equals one if the player was also listed in a midfield role, and $\gamma_\ell$, $\delta_t$ are league and season fixed effects. Standard errors are clustered by player. If xG were perfectly calibrated, $\beta_1=1$ and the other regressors would add nothing.
+
+\subsection{Results}
+
+\input{../tabs/p2_reg_goals_xg5.tex}
+
+xG alone explains 78\% of the variance in goals with a slope of 1.03. Adding shots lowers the xG coefficient to 0.92 and gives a small positive shot coefficient (0.02 goals per shot): at the same xG, forwards who shoot more score slightly more, consistent with xG undervaluing volume or with unobserved finishing ability. Minutes and the midfield indicator add little, and league and season fixed effects barely change the estimates, so the calibration is stable across leagues and years. Variance inflation factors are all below 3.7 (Table~\ref{tab:p2_vif}), so multicollinearity is not a concern.
+
+\input{../tabs/p2_vif.tex}
+
+\subsection{Count-data check and diagnostics}
+
+Goals are counts, so Table~\ref{tab:p2_reg_poisson_xg5} reports Poisson regressions with log xG and log shots. The elasticity with respect to xG is 0.91--0.94, slightly below one, which says that forwards with very high xG convert proportionally a bit less than low-xG forwards. The linear model's residuals are heteroskedastic (White-type statistic 251, $p<0.001$; Figure~\ref{fig:resid}), which is expected for count data and is why clustered standard errors are used throughout.
+
+\input{../tabs/p2_reg_poisson_xg5.tex}
+\input{../tabs/p2_white_test.tex}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.48\textwidth]{p2_resid_fitted.png}
+\includegraphics[width=0.48\textwidth]{p2_resid_qq.png}
+\caption{Residual diagnostics of the linear model with controls.}
+\label{fig:resid}
+\end{figure}
+
+\subsection{Robustness to the selection rule}
+
+\input{../tabs/p2_reg_goals_g10.tex}
+
+On the goals $\geq 10$ sample the same specification gives a visibly different picture: the xG slope falls to 0.85 (0.80 with fixed effects) and the intercept rises to 3.4 goals, against a slope of 1.03 and an intercept of $-0.3$ in the xG $\geq 5$ sample. This reproduces the selection effect found in Part 1: conditioning on a high \emph{outcome} flattens the relation between goals and xG, because forwards with low xG enter the sample only if they scored a lot.
+
+\section{Principal components analysis}
+
+Seven standardized metrics are used: goals/xG, xG per 90, shots per 90, xG per shot, xA per 90, key passes per 90 and xG buildup per 90.
+
+\input{../tabs/p2_pca_variance.tex}
+\input{../tabs/p2_pca_loadings.tex}
+
+Three components have eigenvalues above one (Kaiser criterion) and together explain 78\% of the variance (Figure~\ref{fig:scree}). The loadings give a clear interpretation:
+\begin{itemize}
+\item \textbf{PC1 (36\%) -- creation and involvement:} xA, key passes and xG buildup load around 0.5--0.6.
+\item \textbf{PC2 (27\%) -- chance volume and quality:} xG per 90 (0.71), xG per shot (0.49) and shots (0.47).
+\item \textbf{PC3 (15\%) -- shot-heavy vs.\ finishing:} shots and goals/xG load positively, xG per shot negatively.
+\item \textbf{PC4 (13\%) -- finishing:} dominated by goals/xG (loading $-0.83$), nearly orthogonal to the other dimensions.
+\end{itemize}
+The fourth component is just below the Kaiser threshold (eigenvalue 0.93) and isolates finishing, which is why goals/xG behaves as an almost independent dimension from chance creation and volume. The biplot (Figure~\ref{fig:biplot}) shows no separation by league.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{p2_pca_scree.png}
+\caption{Scree plot.}
+\label{fig:scree}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{p2_pca_biplot.png}
+\caption{PCA biplot (first two components), colored by league.}
+\label{fig:biplot}
+\end{figure}
+
+\section{Composite offensive index}
+
+Two indices are built for each player-season. The \emph{equal-weight index} averages three standardized dimensions: finishing (goals/xG), chance volume (xG/90 and shots/90) and creation (xA/90 and key passes/90). The \emph{PCA-weighted index} sums the first three principal components weighted by their variance share, with signs aligned to the equal-weight index since component signs are arbitrary. The two indices agree closely (Pearson $r=0.87$).
+
+\input{../tabs/p2_index_agreement.tex}
+\input{../tabs/p2_index_equal_ranking.tex}
+\input{../tabs/p2_index_career_top15.tex}
+
+The rankings are plausible: Messi (2018/19, 2016/17, 2017/18) and Cristiano Ronaldo (2014/15) lead the single-season ranking, and over three or more seasons Messi, Neymar, Cristiano Ronaldo and Mbappe lead. The bottom of the ranking is populated by low-minutes forwards with almost no goals. A caveat is that the index mixes a very noisy component (goals/xG) with stable ones, which matters for prediction, as discussed next.
+
+\section{Persistence: skill or luck?}
+
+If goals/xG measured stable finishing skill, a forward's ratio in season $t$ should predict the ratio in season $t+1$. Using 1{,}407 consecutive player-season pairs (532 players), I compute correlations and slopes of each metric between seasons.
+
+\input{../tabs/p2_persistence.tex}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.48\textwidth]{p2_persistence_goals_xg.png}
+\includegraphics[width=0.48\textwidth]{p2_persistence_xg_90.png}
+\caption{Season-to-season persistence of goals/xG (left) and xG per 90 (right). Dashed line: 45 degrees.}
+\label{fig:persistence}
+\end{figure}
+
+The year-to-year correlation of goals/xG is only 0.09 (95\% CI 0.04--0.14), against 0.64 for xG per 90, 0.69 for shots per 90 and 0.75 for key passes per 90. About 91\% of the deviation of a forward's ratio from the mean disappears the next season, so most of a single-season goals/xG is noise (or luck), with at most a small stable skill component. Forwards' ability to \emph{get into} good positions is far more persistent than their conversion.
+
+The same conclusion appears in prediction (Table~\ref{tab:p2_reg_next_season_goals}): next-season goals per 90 are explained only 0.3\% by current goals/xG, but 28\% by current xG per 90. Adding goals/xG to xG per 90 raises $R^2$ only from 0.28 to 0.29, although its coefficient is statistically significant, which is evidence of a small but real finishing skill. Both composite indices predict less than xG per 90 alone ($R^2$ of 0.14 and 0.17) because they carry the noisy finishing component.
+
+\input{../tabs/p2_reg_next_season_goals.tex}
+\input{../tabs/p2_prediction_fit.tex}
+
+\section{Goalkeepers}
+
+\subsection{Design}
+
+Understat's player data contain no post-shot xG or saves, so the goalkeeper effect is proxied at the team level by goals conceded relative to expected goals against, $\text{ga}/\text{xGA}$ (a value below one means the team conceded less than the shots' quality implied). The measure mixes goalkeeping with defensive quality after the shot, so it is a proxy, not a pure shot-stopping metric.
+
+To test whether \emph{elite} goalkeepers concede fewer goals than expected without circularity, ``elite'' is defined out of sample: a goalkeeper-season is elite if the goalkeeper's $\text{ga}/\text{xGA}$ in \emph{all other} seasons is in the lowest quartile (requiring at least two other seasons). The tested season is therefore never used to select the group. This leaves 858 eligible seasons, 215 of them elite.
+
+\subsection{Results}
+
+\input{../tabs/p2_gk_groups.tex}
+\input{../tabs/p2_gk_tests.tex}
+
+Elite goalkeepers conceded 3.8\% fewer goals than their xGA in the tested season (mean ratio 0.962, one-sided $p<0.001$), whereas other goalkeepers are indistinguishable from one (0.998, $p=0.77$). The difference between the groups is significant (Welch $p<0.001$, Wilcoxon $p<0.001$); Figure~\ref{fig:gkbox} shows the shift. In terms of goals, the elite group prevented about 1.9 goals per season above expectation versus 0.2 for the others.
+
+The prior ratio of the elite group averaged 0.89 while their realized ratio is 0.96: roughly 30\% of the previous advantage carries over. This regression toward the mean is the same phenomenon as in the forwards' case and is exactly what an out-of-sample test should show.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{p2_gk_box.png}
+\caption{Goals conceded divided by xGA, by out-of-sample goalkeeper class.}
+\label{fig:gkbox}
+\end{figure}
+
+\subsection{Regressions and persistence}
+
+\input{../tabs/p2_gk_models.tex}
+
+Controlling for xGA and for league and season fixed effects, the elite indicator is associated with about one fewer goal conceded per season (coefficient $-1.07$, $p=0.08$) and a ratio lower by 0.022 ($p=0.11$), borderline significance in regression though clear in the group tests. The prior ratio has a coefficient of 0.24 ($p=0.002$) on next-season ratio: a goalkeeper's past performance predicts about a quarter of the current deviation. The test on the xGA per match shows elite goalkeepers' teams face slightly less dangerous chances (elite $-0.07$, $p=0.04$), suggesting that part of the effect reflects defensive strength or selection into better teams rather than the goalkeeper alone; the data cannot separate these.
+
+\input{../tabs/p2_gk_persistence.tex}
+
+For the same goalkeeper, $\text{ga}/\text{xGA}$ has a year-to-year correlation of 0.19 (CI 0.11--0.26), twice that of forwards' finishing (0.09) but far below the 0.61 persistence of xGA per match. Over long careers, the lowest ratios belong to Oblak (0.82 over 10 seasons), Alisson (0.84), Nick Pope (0.86) and Courtois (0.89) (Table~\ref{tab:p2_gk_career_extremes}), which agrees with their reputations and supports using the ratio as a noisy skill measure.
+
+\input{../tabs/p2_gk_career_extremes.tex}
+
+\section{Limitations}
+
+\begin{itemize}
+\item xG is Understat's own model and not Opta's; results depend on its calibration.
+\item Goalkeeper analysis is at the team level: there is no shot-level post-shot xG or save data, so defensive quality and goalkeeping are confounded.
+\item ``Elite'' is defined statistically from past performance, not from an external ranking, so it is by construction a noisy proxy.
+\item Consecutive-season pairs require both seasons to have $\text{xG}\geq 5$, which excludes injured or benched players.
+\item Many tests and specifications are reported; the $p$-values are not adjusted for multiple comparisons.
+\end{itemize}
+
+\section{Conclusion}
+
+Multivariate methods lead to a consistent message. xG is well calibrated for forwards, and the extra information in shots is small. Chance creation and volume are stable, individual-level traits (year-to-year correlations of 0.6--0.75), whereas finishing measured by goals/xG is mostly noise within a single season (correlation 0.09) with a small but statistically detectable persistent component. PCA shows that finishing is a separate dimension from creation and volume, and that composite indices describe player profiles well but predict next-season scoring worse than xG per 90 alone. For goalkeepers, the same logic gives a more favorable result: elite goalkeepers selected out of sample do concede fewer goals than xGA (ratio 0.96), a modest effect that is better measured with shot-level data in future work.
+
+\end{document}

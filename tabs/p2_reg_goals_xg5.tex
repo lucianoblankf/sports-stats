@@ -1,0 +1,32 @@
+
+\begin{table}
+\begin{center}
+\adjustbox{max width=\textwidth}{\begin{tabular}{l c c c c c}
+\toprule
+ & (1) xG & (2) + shots & (3) + minutes, midfield & (4) league FE & (5) league + season FE \\
+\midrule
+(Intercept)             & $-0.29$      & $-0.82^{***}$ & $-1.22^{***}$ &              &              \\
+                        & $(0.15)$     & $(0.17)$      & $(0.19)$      &              &              \\
+xg                      & $1.03^{***}$ & $0.92^{***}$  & $0.93^{***}$  & $0.93^{***}$ & $0.95^{***}$ \\
+                        & $(0.02)$     & $(0.02)$      & $(0.02)$      & $(0.02)$     & $(0.02)$     \\
+shots                   &              & $0.02^{***}$  & $0.02^{***}$  & $0.02^{***}$ & $0.01^{**}$  \\
+                        &              & $(0.00)$      & $(0.00)$      & $(0.00)$     & $(0.00)$     \\
+time                    &              &               & $0.00^{*}$    & $0.00^{**}$  & $0.00^{**}$  \\
+                        &              &               & $(0.00)$      & $(0.00)$     & $(0.00)$     \\
+also\_midfield          &              &               & $0.09$        & $0.06$       & $0.14$       \\
+                        &              &               & $(0.11)$      & $(0.11)$     & $(0.11)$     \\
+\midrule
+Num. obs.               & $2872$       & $2872$        & $2872$        & $2872$       & $2872$       \\
+R$^2$ (full model)      & $0.78$       & $0.78$        & $0.78$        & $0.78$       & $0.79$       \\
+R$^2$ (proj model)      & $$           & $$            & $$            & $0.78$       & $0.79$       \\
+Adj. R$^2$ (full model) & $0.78$       & $0.78$        & $0.78$        & $0.78$       & $0.79$       \\
+Adj. R$^2$ (proj model) & $$           & $$            & $$            & $0.78$       & $0.79$       \\
+Num. groups: league     & $$           & $$            & $$            & $6$          & $6$          \\
+Num. groups: season     & $$           & $$            & $$            & $$           & $11$         \\
+\bottomrule
+\multicolumn{6}{l}{\scriptsize{$^{***}p<0.001$; $^{**}p<0.01$; $^{*}p<0.05$}}
+\end{tabular}}
+\caption{Goals on xG, shots, minutes and position (forwards with xG $\geq$ 5)}
+\label{tab:p2_reg_goals_xg5}
+\end{center}
+\end{table}

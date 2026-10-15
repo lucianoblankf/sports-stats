@@ -1,15 +1,27 @@
 # Helpers to save tables and figures
 
+# Wraps every tabular in a .tex file with adjustbox so wide tables fit the text width
+# (the LaTeX document needs \usepackage{adjustbox})
+shrink_wide_tabular <- function(path) {
+  txt <- paste(readLines(path, warn = FALSE), collapse = "\n")
+  txt <- gsub("\\begin{tabular}", "\\adjustbox{max width=\\textwidth}{\\begin{tabular}",
+              txt, fixed = TRUE)
+  txt <- gsub("\\end{tabular}", "\\end{tabular}}", txt, fixed = TRUE)
+  writeLines(txt, path)
+}
+
 # Saves a table to tabs/ as .csv, .rds and .tex (kable/booktabs)
 save_tab <- function(tab, name, caption, tab_tex = tab) {
   readr::write_csv(tab, file.path("tabs", paste0(name, ".csv")))
   readr::write_rds(tab, file.path("tabs", paste0(name, ".rds")))
+  tex_path <- file.path("tabs", paste0(name, ".tex"))
   tab_tex |>
     dplyr::mutate(dplyr::across(dplyr::where(is.numeric), \(x) round(x, 3))) |>
     knitr::kable(format = "latex", booktabs = TRUE, caption = caption,
                  label = name) |>
     as.character() |>
-    writeLines(file.path("tabs", paste0(name, ".tex")))
+    writeLines(tex_path)
+  shrink_wide_tabular(tex_path)
   cli::cli_alert_success("Table saved: {.file tabs/{name}}")
   invisible(tab)
 }

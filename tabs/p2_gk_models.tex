@@ -1,0 +1,28 @@
+
+\begin{table}
+\begin{center}
+\adjustbox{max width=\textwidth}{\begin{tabular}{l c c c c}
+\toprule
+ & (1) goals conceded & (2) ga/xGA, elite & (3) ga/xGA, prior ratio & (4) xGA per match, elite \\
+\midrule
+xga                     & $1.00^{***}$ &          &             &             \\
+                        & $(0.02)$     &          &             &             \\
+elite\_num              & $-1.07$      & $-0.02$  &             & $-0.07^{*}$ \\
+                        & $(0.61)$     & $(0.01)$ &             & $(0.03)$    \\
+prior\_ratio            &              &          & $0.24^{**}$ &             \\
+                        &              &          & $(0.08)$    &             \\
+\midrule
+Num. obs.               & $858$        & $858$    & $858$       & $858$       \\
+Num. groups: league     & $6$          & $6$      & $6$         & $6$         \\
+Num. groups: season     & $11$         & $11$     & $11$        & $11$        \\
+R$^2$ (full model)      & $0.78$       & $0.09$   & $0.10$      & $0.14$      \\
+R$^2$ (proj model)      & $0.74$       & $0.00$   & $0.02$      & $0.01$      \\
+Adj. R$^2$ (full model) & $0.77$       & $0.07$   & $0.09$      & $0.13$      \\
+Adj. R$^2$ (proj model) & $0.74$       & $0.00$   & $0.02$      & $0.01$      \\
+\bottomrule
+\multicolumn{5}{l}{\scriptsize{$^{***}p<0.001$; $^{**}p<0.01$; $^{*}p<0.05$}}
+\end{tabular}}
+\caption{Goalkeeper models (goals conceded vs xGA)}
+\label{tab:p2_gk_models}
+\end{center}
+\end{table}

@@ -21,6 +21,11 @@ build_forwards <- function(data, goals_min = 0, xg_min = 0, main_position = "F",
       goals >= goals_min,
       xg >= xg_min
     ) |>
+    add_derived_vars()
+}
+
+add_derived_vars <- function(data) {
+  data |>
     dplyr::mutate(
       goals_xg = goals / xg,
       npg_npxg = npg / npxg,
@@ -29,6 +34,41 @@ build_forwards <- function(data, goals_min = 0, xg_min = 0, main_position = "F",
       xg_90 = xg / time * 90,
       key_passes_90 = key_passes / time * 90,
       xa_90 = xa / time * 90,
+      goals_90 = goals / time * 90,
+      xg_per_shot = xg / shots,
+      xg_buildup_90 = xg_buildup / time * 90,
+      xg_chain_90 = xg_chain / time * 90,
       group_goals = dplyr::if_else(goals >= 20, "20+ goals", "10-19 goals")
     )
+}
+
+# Part 2: one row per player-season (clubs merged for players who transferred).
+# League is the one where the player had more minutes; primary_position is
+# kept only when the player was classified the same way at every club.
+merge_player_seasons <- function(data, exclude_seasons = "2025/26") {
+  data |>
+    dplyr::filter(!season %in% exclude_seasons) |>
+    dplyr::arrange(id, season, dplyr::desc(time)) |>
+    dplyr::summarise(
+      player_name = dplyr::first(player_name),
+      team_title = paste(unique(team_title), collapse = " / "),
+      league = dplyr::first(league),
+      year = dplyr::first(year),
+      n_clubs = dplyr::n(),
+      position = paste(sort(unique(unlist(stringr::str_split(position, " ")))), collapse = " "),
+      primary_position = if (dplyr::n_distinct(primary_position) == 1) {
+        dplyr::first(primary_position)
+      } else {
+        "mixed"
+      },
+      dplyr::across(c(games, time, goals, npg, shots, key_passes, xg, npxg, assists,
+                      xa, xg_buildup, xg_chain), sum),
+      .by = c(id, season)
+    )
+}
+
+build_forwards_merged <- function(data, goals_min = 0, xg_min = 0) {
+  merge_player_seasons(data) |>
+    dplyr::filter(primary_position == "F", goals >= goals_min, xg >= xg_min) |>
+    add_derived_vars()
 }

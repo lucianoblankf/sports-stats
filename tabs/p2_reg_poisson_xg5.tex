@@ -1,0 +1,29 @@
+
+\begin{table}
+\begin{center}
+\adjustbox{max width=\textwidth}{\begin{tabular}{l c c}
+\toprule
+ & (1) Poisson & (2) Poisson, league + season FE \\
+\midrule
+(Intercept)         & $-0.48^{***}$ &              \\
+                    & $(0.06)$      &              \\
+log(xg)             & $0.91^{***}$  & $0.94^{***}$ \\
+                    & $(0.02)$      & $(0.02)$     \\
+log(shots)          & $0.16^{***}$  & $0.14^{***}$ \\
+                    & $(0.02)$      & $(0.02)$     \\
+also\_midfield      & $0.01$        & $0.02$       \\
+                    & $(0.01)$      & $(0.01)$     \\
+\midrule
+Num. obs.           & $2872$        & $2872$       \\
+Deviance            & $2038.53$     & $1977.58$    \\
+Log Likelihood      & $-6725.83$    & $-6695.35$   \\
+Pseudo R$^2$        & $0.30$        & $0.31$       \\
+Num. groups: league & $$            & $6$          \\
+Num. groups: season & $$            & $11$         \\
+\bottomrule
+\multicolumn{3}{l}{\scriptsize{$^{***}p<0.001$; $^{**}p<0.01$; $^{*}p<0.05$}}
+\end{tabular}}
+\caption{Poisson regressions of goals (forwards with xG $\geq$ 5)}
+\label{tab:p2_reg_poisson_xg5}
+\end{center}
+\end{table}

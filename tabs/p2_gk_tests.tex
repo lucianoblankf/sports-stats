@@ -1,0 +1,18 @@
+\begin{table}
+
+\caption{\label{tab:p2_gk_tests}Goalkeeper hypothesis tests}
+\centering
+\adjustbox{max width=\textwidth}{\begin{tabular}[t]{lrl}
+\toprule
+hypothesis & statistic & p\_value\\
+\midrule
+Elite: mean ga/xGA < 1 (t-test) & -4.308 & < 1e-04\\
+Elite: median ga/xGA < 1 (Wilcoxon) & 7951.000 & < 1e-04\\
+Other: mean ga/xGA = 1 (t-test) & -0.295 & 0.767858\\
+Elite mean < other mean (Welch) & -3.502 & 0.000257\\
+Elite distribution < other (Wilcoxon) & 59220.000 & 0.000823\\
+\addlinespace
+xGA per match: elite = other (Welch) & -2.066 & 0.039519\\
+\bottomrule
+\end{tabular}}
+\end{table}

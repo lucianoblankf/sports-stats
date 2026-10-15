@@ -16,6 +16,19 @@ Open `Metodos_Estatisticos.Rproj` in RStudio and run `00_run_all.R` (or each scr
 | `06_regression.R` | fixed-effects regressions (`fixest`, `texreg` tables) |
 | `07_clusters.R` | finishing profiles via k-means |
 
+### Part 2 (multivariate evaluation)
+
+| Script | What it does |
+|---|---|
+| `08_download_team_data.R` | team-season goals conceded and xGA from Understat (goalkeeper analysis) |
+| `09_player_seasons.R` | merges transfers by player id + season; main sample = forwards with xG >= 5 |
+| `10_regression_extended.R` | goals ~ xG + shots + minutes + position + league/season FE, Poisson check, diagnostics |
+| `11_pca_index.R` | PCA of finishing/creation metrics and two composite offensive indices |
+| `12_persistence.R` | year-to-year persistence (skill vs luck) and next-season prediction |
+| `13_goalkeepers.R` | do elite goalkeepers concede fewer goals than xGA? |
+
+The LaTeX write-up is `report/part2.tex` (upload the whole folder to Overleaf).
+
 Reusable functions live in `R/`. Outputs go to `tabs/` and `figs/`. Old code is kept in `legacy/` (original Portuguese version), and the original course materials are in `docs/`.
 
 ## Main results
@@ -25,3 +38,11 @@ Reusable functions live in `R/`. Outputs go to `tabs/` and `figs/`. Old code is 
 - Simulation with goals ~ Poisson(xG), i.e. no skill at all: the 10-goal cutoff alone already produces a mean ratio of about 1.22.
 - Calibration regression (xG >= 5): xG coefficient of about 1.03, R2 of about 0.78, stable with league and season fixed effects.
 - Clusters: k = 2 by silhouette (0.29), weak separation; the main axis is chance creation (key passes, xA).
+
+### Part 2 results
+
+- xG is well calibrated for forwards (slope 1.03, R2 0.78); extra shots add little (0.02 goals per shot).
+- Persistence: goals/xG has a year-to-year correlation of only 0.09, against 0.64 for xG per 90. Most single-season finishing is noise.
+- PCA: three components explain 78% of the variance; finishing is a separate dimension from creation and volume.
+- Composite indices describe profiles well but predict next-season goals worse (R2 0.14-0.17) than xG per 90 alone (0.28).
+- Goalkeepers (out-of-sample elite definition): elite goalkeepers concede 3.8% fewer goals than xGA (ratio 0.962, p < 0.001); other goalkeepers are at 1.0.
