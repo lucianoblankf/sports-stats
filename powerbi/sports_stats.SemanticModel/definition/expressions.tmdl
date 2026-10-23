@@ -1,0 +1,5 @@
+expression DataFolder = "C:\Users\Administrador\OneDrive\Documentos\Projetos R\Metodos_Estatisticos\data\processed\powerbi\" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 9d339e64-4db0-4a5f-bad4-bdc905f3fd6f
+
+	annotation PBI_ResultType = Text
+

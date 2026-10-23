@@ -1,0 +1,100 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "line_xg_cut",
+  "position": {
+    "x": 660,
+    "y": 215,
+    "z": 0,
+    "height": 485,
+    "width": 600,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "bias_xg_cut"
+                    }
+                  },
+                  "Property": "threshold"
+                }
+              },
+              "queryRef": "bias_xg_cut.threshold",
+              "nativeQueryRef": "threshold",
+              "active": true,
+              "displayName": "threshold"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "bias_xg_cut"
+                        }
+                      },
+                      "Property": "real_mean"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(bias_xg_cut.real_mean)",
+              "nativeQueryRef": "Real data",
+              "displayName": "Real data"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Minimum-xG cutoff: mean goals/xG'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

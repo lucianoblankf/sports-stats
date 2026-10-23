@@ -13,7 +13,8 @@ scripts <- c(
   "10_regression_extended.R",
   "11_pca_index.R",
   "12_persistence.R",
-  "13_goalkeepers.R"
+  "13_goalkeepers.R",
+  "15_build_powerbi.R"
 )
 
 for (script in scripts) {

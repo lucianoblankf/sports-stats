@@ -1,0 +1,232 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "table_career_index",
+  "position": {
+    "x": 20,
+    "y": 410,
+    "z": 0,
+    "height": 290,
+    "width": 1240,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "career_index"
+                    }
+                  },
+                  "Property": "player_name"
+                }
+              },
+              "queryRef": "career_index.player_name",
+              "nativeQueryRef": "player_name",
+              "displayName": "Player"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "career_index"
+                        }
+                      },
+                      "Property": "seasons"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(career_index.seasons)",
+              "nativeQueryRef": "Seasons",
+              "displayName": "Seasons"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "career_index"
+                        }
+                      },
+                      "Property": "goals"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(career_index.goals)",
+              "nativeQueryRef": "Goals",
+              "displayName": "Goals"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "career_index"
+                        }
+                      },
+                      "Property": "xg"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(career_index.xg)",
+              "nativeQueryRef": "xG",
+              "displayName": "xG"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "career_index"
+                        }
+                      },
+                      "Property": "goals_xg"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(career_index.goals_xg)",
+              "nativeQueryRef": "Goals/xG",
+              "displayName": "Goals/xG"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "career_index"
+                        }
+                      },
+                      "Property": "index_equal"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(career_index.index_equal)",
+              "nativeQueryRef": "Equal-weight index",
+              "displayName": "Equal-weight index"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "career_index"
+                        }
+                      },
+                      "Property": "index_pca"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(career_index.index_pca)",
+              "nativeQueryRef": "PCA index",
+              "displayName": "PCA index"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "career_index"
+                      }
+                    },
+                    "Property": "index_equal"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Forwards ranked by mean composite index (3+ seasons)'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

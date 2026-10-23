@@ -1,0 +1,110 @@
+table gk_seasons
+	lineageTag: efeb4fda-a3d9-4135-b0f2-09b399d4de8f
+
+	measure Team-seasons = COUNTROWS(gk_seasons)
+		formatString: #,0
+		lineageTag: e661e9d3-ae84-48d1-b9d1-13a2048312d6
+
+	measure 'Mean ga/xGA' = AVERAGE(gk_seasons[ga_xga])
+		formatString: 0.000
+		lineageTag: 23e6f8d3-368c-4915-99bf-dfb003c03558
+
+	measure 'Elite mean ga/xGA' = CALCULATE(AVERAGE(gk_seasons[ga_xga]), gk_seasons[elite_group] = "Elite (out of sample)")
+		formatString: 0.000
+		lineageTag: cb2919d2-edd5-43e3-baa8-cf3b41163483
+
+	measure 'Other mean ga/xGA' = CALCULATE(AVERAGE(gk_seasons[ga_xga]), gk_seasons[elite_group] = "Other")
+		formatString: 0.000
+		lineageTag: 0837c67a-de71-4465-bca6-3c6b8632a709
+
+	column row_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 1a185aea-5c12-46b7-8759-17a8b4d356c2
+		summarizeBy: none
+		sourceColumn: row_id
+
+	column player_name
+		dataType: string
+		lineageTag: 33013933-ce8c-41ea-92d3-ad62fabe9b0d
+		summarizeBy: none
+		sourceColumn: player_name
+
+	column team_title
+		dataType: string
+		lineageTag: e3a72861-8b5d-4b83-896a-74bffc74d733
+		summarizeBy: none
+		sourceColumn: team_title
+
+	column league
+		dataType: string
+		lineageTag: e43d0663-17d2-440d-817e-08dda59bff1d
+		summarizeBy: none
+		sourceColumn: league
+
+	column season
+		dataType: string
+		lineageTag: e6983f3e-d7e1-46c1-b513-7ed4c972ac6c
+		summarizeBy: none
+		sourceColumn: season
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: 642fde16-bdd7-46ed-8603-ee04fb56d505
+		summarizeBy: none
+		sourceColumn: year
+
+	column ga
+		dataType: int64
+		formatString: 0
+		lineageTag: 926232ff-c91c-4b58-a7e7-55df66a1c208
+		summarizeBy: sum
+		sourceColumn: ga
+
+	column xga
+		dataType: double
+		lineageTag: 2677e7a9-c19c-4a80-881a-f2ccd07e66d5
+		summarizeBy: sum
+		sourceColumn: xga
+
+	column ga_xga
+		dataType: double
+		lineageTag: 4b991ca4-7578-4a56-9791-4f3369ad6e18
+		summarizeBy: sum
+		sourceColumn: ga_xga
+
+	column goals_prevented
+		dataType: double
+		lineageTag: af902fe7-6d51-4b58-baf4-da379b27e53f
+		summarizeBy: sum
+		sourceColumn: goals_prevented
+
+	column xga_90
+		dataType: double
+		lineageTag: 217d3885-8914-4dd0-b621-988db37d6941
+		summarizeBy: sum
+		sourceColumn: xga_90
+
+	column prior_ratio
+		dataType: double
+		lineageTag: c71c41d6-3906-494b-ba32-f08a7fbb28b2
+		summarizeBy: sum
+		sourceColumn: prior_ratio
+
+	column elite_group
+		dataType: string
+		lineageTag: 8b919bdd-97bb-432d-9564-031a7005a4de
+		summarizeBy: none
+		sourceColumn: elite_group
+
+	partition gk_seasons = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "gk_seasons.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"row_id", Int64.Type}, {"player_name", type text}, {"team_title", type text}, {"league", type text}, {"season", type text}, {"year", Int64.Type}, {"ga", Int64.Type}, {"xga", type number}, {"ga_xga", type number}, {"goals_prevented", type number}, {"xga_90", type number}, {"prior_ratio", type number}, {"elite_group", type text}}, "en-US")
+				in
+				    Typed
+

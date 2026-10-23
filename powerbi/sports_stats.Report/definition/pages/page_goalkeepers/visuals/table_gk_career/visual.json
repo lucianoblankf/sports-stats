@@ -1,0 +1,152 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "table_gk_career",
+  "position": {
+    "x": 900,
+    "y": 215,
+    "z": 0,
+    "height": 485,
+    "width": 360,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gk_career"
+                    }
+                  },
+                  "Property": "player_name"
+                }
+              },
+              "queryRef": "gk_career.player_name",
+              "nativeQueryRef": "player_name",
+              "displayName": "Goalkeeper"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "gk_career"
+                        }
+                      },
+                      "Property": "seasons"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(gk_career.seasons)",
+              "nativeQueryRef": "Seasons",
+              "displayName": "Seasons"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "gk_career"
+                        }
+                      },
+                      "Property": "ga_xga"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(gk_career.ga_xga)",
+              "nativeQueryRef": "ga/xGA",
+              "displayName": "ga/xGA"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "gk_career"
+                      }
+                    },
+                    "Property": "ga_xga"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Career ga/xGA (4+ seasons)'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

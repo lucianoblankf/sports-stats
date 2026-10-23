@@ -1,0 +1,125 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "scatter_p_xg90",
+  "position": {
+    "x": 660,
+    "y": 400,
+    "z": 0,
+    "height": 300,
+    "width": 600,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "scatterChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "persistence_pairs"
+                    }
+                  },
+                  "Property": "row_id"
+                }
+              },
+              "queryRef": "persistence_pairs.row_id",
+              "nativeQueryRef": "row_id",
+              "active": true,
+              "displayName": "row_id"
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "persistence_pairs"
+                        }
+                      },
+                      "Property": "xg_90_t"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(persistence_pairs.xg_90_t)",
+              "nativeQueryRef": "xG per 90, season t",
+              "active": true,
+              "displayName": "xG per 90, season t"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "persistence_pairs"
+                        }
+                      },
+                      "Property": "xg_90_t1"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(persistence_pairs.xg_90_t1)",
+              "nativeQueryRef": "xG per 90, season t+1",
+              "displayName": "xG per 90, season t+1"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'xG per 90 persists strongly'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,242 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "scatter_xg_goals",
+  "position": {
+    "x": 20,
+    "y": 215,
+    "z": 0,
+    "height": 485,
+    "width": 620,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "scatterChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "player_seasons"
+                    }
+                  },
+                  "Property": "row_id"
+                }
+              },
+              "queryRef": "player_seasons.row_id",
+              "nativeQueryRef": "row_id",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "player_seasons"
+                    }
+                  },
+                  "Property": "player_name"
+                }
+              },
+              "queryRef": "player_seasons.player_name",
+              "nativeQueryRef": "player_name",
+              "active": false
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "player_seasons"
+                    }
+                  },
+                  "Property": "league"
+                }
+              },
+              "queryRef": "player_seasons.league",
+              "nativeQueryRef": "league",
+              "displayName": "league"
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "player_seasons"
+                        }
+                      },
+                      "Property": "xg"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(player_seasons.xg)",
+              "nativeQueryRef": "xG",
+              "active": true,
+              "displayName": "xG"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "player_seasons"
+                        }
+                      },
+                      "Property": "goals"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(player_seasons.goals)",
+              "nativeQueryRef": "Goals",
+              "displayName": "Goals"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'xG vs goals (each point = one player-season)'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "acb36f1e86725d1fb409",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "player_seasons"
+                  }
+                },
+                "Property": "xg"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "85139d9590d3b5a65978",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "player_seasons"
+                  }
+                },
+                "Property": "goals"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "14d63e83e98a80ce2f7d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "player_seasons"
+              }
+            },
+            "Property": "league"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "ef96f0004e9d1b9d2bd6",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "player_seasons"
+              }
+            },
+            "Property": "player_name"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "2cfb71ff55a75117eb4e",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "player_seasons"
+              }
+            },
+            "Property": "row_id"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

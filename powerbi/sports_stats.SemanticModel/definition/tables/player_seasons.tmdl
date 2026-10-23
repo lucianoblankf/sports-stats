@@ -1,0 +1,155 @@
+table player_seasons
+	lineageTag: 700a0a44-6a71-46bb-9ea8-b22c97c8f9b3
+
+	measure 'Player seasons' = COUNTROWS(player_seasons)
+		formatString: #,0
+		lineageTag: 5581a8c2-a3c2-456c-b1a9-18e08cb96c76
+
+	measure 'Goals/xG (total)' = DIVIDE(SUM(player_seasons[goals]), SUM(player_seasons[xg]))
+		formatString: 0.000
+		lineageTag: a261efe0-454b-4bcb-b398-124cc9962f2e
+
+	measure 'Mean goals/xG' = AVERAGE(player_seasons[goals_xg])
+		formatString: 0.000
+		lineageTag: f624000b-e1d4-4659-9320-8cd2d0f9416c
+
+	measure 'Mean xG per 90' = AVERAGE(player_seasons[xg_90])
+		formatString: 0.000
+		lineageTag: 94e45fd5-05ce-4762-96a2-0d6788a9a520
+
+	column row_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 7e365930-b341-44e7-94d4-872970bb0eaf
+		summarizeBy: none
+		sourceColumn: row_id
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 934b03fb-39f8-4c66-9190-bb9db44787d8
+		summarizeBy: none
+		sourceColumn: id
+
+	column player_name
+		dataType: string
+		lineageTag: c40ea4b1-e42a-448b-a30a-cd64f5373dc4
+		summarizeBy: none
+		sourceColumn: player_name
+
+	column season
+		dataType: string
+		lineageTag: bcff8546-8e49-49b1-a261-9ac7b6aa3fdb
+		summarizeBy: none
+		sourceColumn: season
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: 6585e6f2-a1c9-4b2d-ad4d-320db9efeee3
+		summarizeBy: none
+		sourceColumn: year
+
+	column team_title
+		dataType: string
+		lineageTag: fc895c6d-cf25-48ac-9742-c552571051e4
+		summarizeBy: none
+		sourceColumn: team_title
+
+	column league
+		dataType: string
+		lineageTag: 77af0e82-8d57-4cbb-a6b8-37a78d4680cb
+		summarizeBy: none
+		sourceColumn: league
+
+	column goals
+		dataType: int64
+		formatString: 0
+		lineageTag: 51c944d1-526d-42ae-9c76-d0c041f17978
+		summarizeBy: sum
+		sourceColumn: goals
+
+	column xg
+		dataType: double
+		lineageTag: 9e4ee0c2-750b-47a8-a275-3e210fe6b58d
+		summarizeBy: sum
+		sourceColumn: xg
+
+	column shots
+		dataType: int64
+		formatString: 0
+		lineageTag: b1926359-e8f4-441f-be92-47f2c7ab1ea0
+		summarizeBy: sum
+		sourceColumn: shots
+
+	column time
+		dataType: int64
+		formatString: 0
+		lineageTag: 42fac222-06be-4ed3-9668-0bc39d7fb5e6
+		summarizeBy: sum
+		sourceColumn: time
+
+	column goals_xg
+		dataType: double
+		lineageTag: 76bcd866-c041-4e01-9a47-2d312d9140ea
+		summarizeBy: sum
+		sourceColumn: goals_xg
+
+	column goals_minus_xg
+		dataType: double
+		lineageTag: 3165c6d4-8e14-46fb-870b-90871d284056
+		summarizeBy: sum
+		sourceColumn: goals_minus_xg
+
+	column shots_90
+		dataType: double
+		lineageTag: a3dc2981-a779-404d-a147-4423025b03e4
+		summarizeBy: sum
+		sourceColumn: shots_90
+
+	column xg_90
+		dataType: double
+		lineageTag: baf053e0-5d47-4f6c-9a13-e269f4c8bdb0
+		summarizeBy: sum
+		sourceColumn: xg_90
+
+	column xa_90
+		dataType: double
+		lineageTag: b5aa9dd2-4943-4ce1-80f8-2b13523ba958
+		summarizeBy: sum
+		sourceColumn: xa_90
+
+	column key_passes_90
+		dataType: double
+		lineageTag: 00a7ee0c-be07-487d-bf35-e51cf4294cee
+		summarizeBy: sum
+		sourceColumn: key_passes_90
+
+	column xg_per_shot
+		dataType: double
+		lineageTag: 1230c80f-93f4-4e99-b298-9d65c511f851
+		summarizeBy: sum
+		sourceColumn: xg_per_shot
+
+	column index_equal
+		dataType: double
+		lineageTag: bb1ffa76-54d9-417a-aab6-876a3b221635
+		summarizeBy: sum
+		sourceColumn: index_equal
+
+	column index_pca
+		dataType: double
+		lineageTag: e6ae49bd-111a-4fc3-9e09-455b90b2aa9f
+		summarizeBy: sum
+		sourceColumn: index_pca
+
+	partition player_seasons = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "player_seasons.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"row_id", Int64.Type}, {"id", Int64.Type}, {"player_name", type text}, {"season", type text}, {"year", Int64.Type}, {"team_title", type text}, {"league", type text}, {"goals", Int64.Type}, {"xg", type number}, {"shots", Int64.Type}, {"time", Int64.Type}, {"goals_xg", type number}, {"goals_minus_xg", type number}, {"shots_90", type number}, {"xg_90", type number}, {"xa_90", type number}, {"key_passes_90", type number}, {"xg_per_shot", type number}, {"index_equal", type number}, {"index_pca", type number}}, "en-US")
+				in
+				    Typed
+

@@ -1,0 +1,170 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "table_loadings",
+  "position": {
+    "x": 460,
+    "y": 90,
+    "z": 0,
+    "height": 300,
+    "width": 800,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "pca_loadings"
+                    }
+                  },
+                  "Property": "variable"
+                }
+              },
+              "queryRef": "pca_loadings.variable",
+              "nativeQueryRef": "variable",
+              "displayName": "Metric"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "pca_loadings"
+                        }
+                      },
+                      "Property": "PC1"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(pca_loadings.PC1)",
+              "nativeQueryRef": "PC1",
+              "displayName": "PC1"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "pca_loadings"
+                        }
+                      },
+                      "Property": "PC2"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(pca_loadings.PC2)",
+              "nativeQueryRef": "PC2",
+              "displayName": "PC2"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "pca_loadings"
+                        }
+                      },
+                      "Property": "PC3"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(pca_loadings.PC3)",
+              "nativeQueryRef": "PC3",
+              "displayName": "PC3"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "pca_loadings"
+                        }
+                      },
+                      "Property": "PC4"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(pca_loadings.PC4)",
+              "nativeQueryRef": "PC4",
+              "displayName": "PC4"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'PCA loadings'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

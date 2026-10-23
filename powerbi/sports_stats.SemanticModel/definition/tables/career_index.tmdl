@@ -1,0 +1,63 @@
+table career_index
+	lineageTag: 7a40a7cc-ec5f-470c-ba3c-756b15b379c9
+
+	column player_name
+		dataType: string
+		lineageTag: 3f2e469a-a96a-4137-9677-6283810d5d4a
+		summarizeBy: none
+		sourceColumn: player_name
+
+	column seasons
+		dataType: int64
+		formatString: 0
+		lineageTag: 5a29b5b4-d9b4-49fb-8b74-5e30642df7e2
+		summarizeBy: none
+		sourceColumn: seasons
+
+	column goals
+		dataType: int64
+		formatString: 0
+		lineageTag: 481d5d1b-52fa-45e4-9039-7c4c1f437b28
+		summarizeBy: sum
+		sourceColumn: goals
+
+	column xg
+		dataType: double
+		lineageTag: 170f308b-9412-47a8-9d87-eba8e8ef0588
+		summarizeBy: sum
+		sourceColumn: xg
+
+	column goals_xg
+		dataType: double
+		lineageTag: 9796d291-f7e1-46f0-8a69-84615bd77de9
+		summarizeBy: sum
+		sourceColumn: goals_xg
+
+	column xg_90
+		dataType: double
+		lineageTag: d85c6a5e-eb19-4019-9eb0-1aaaec9cb9c9
+		summarizeBy: sum
+		sourceColumn: xg_90
+
+	column index_equal
+		dataType: double
+		lineageTag: bf795955-a624-47fe-b1ee-c97d48ddfe8a
+		summarizeBy: sum
+		sourceColumn: index_equal
+
+	column index_pca
+		dataType: double
+		lineageTag: 1b305d2c-166c-4c51-b63a-efd981137bd8
+		summarizeBy: sum
+		sourceColumn: index_pca
+
+	partition career_index = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "career_index.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"player_name", type text}, {"seasons", Int64.Type}, {"goals", Int64.Type}, {"xg", type number}, {"goals_xg", type number}, {"xg_90", type number}, {"index_equal", type number}, {"index_pca", type number}}, "en-US")
+				in
+				    Typed
+

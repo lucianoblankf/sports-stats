@@ -1,0 +1,25 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["player_seasons","persistence_pairs","persistence_summary","bias_goals_cut","bias_xg_cut","pca_variance","pca_loadings","career_index","gk_seasons","gk_career","DataFolder"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table player_seasons
+ref table persistence_pairs
+ref table persistence_summary
+ref table bias_goals_cut
+ref table bias_xg_cut
+ref table pca_variance
+ref table pca_loadings
+ref table career_index
+ref table gk_seasons
+ref table gk_career
+
+ref cultureInfo en-US
+

@@ -1,0 +1,43 @@
+table pca_loadings
+	lineageTag: 4a884c57-c97e-41bd-a5dd-07bde5313bc4
+
+	column variable
+		dataType: string
+		lineageTag: f40af40e-e524-4c39-bcc7-3155110c630d
+		summarizeBy: none
+		sourceColumn: variable
+
+	column PC1
+		dataType: double
+		lineageTag: fee5d8a9-749f-4a41-bc0c-0a05e56f3af9
+		summarizeBy: sum
+		sourceColumn: PC1
+
+	column PC2
+		dataType: double
+		lineageTag: 71e2da5e-92d8-4184-9b27-1f716a91a152
+		summarizeBy: sum
+		sourceColumn: PC2
+
+	column PC3
+		dataType: double
+		lineageTag: a7fdac61-097e-4916-ba4d-bfddd72154cb
+		summarizeBy: sum
+		sourceColumn: PC3
+
+	column PC4
+		dataType: double
+		lineageTag: 2cdecafd-d01c-454d-8f7b-982303e163e6
+		summarizeBy: sum
+		sourceColumn: PC4
+
+	partition pca_loadings = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "pca_loadings.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"variable", type text}, {"PC1", type number}, {"PC2", type number}, {"PC3", type number}, {"PC4", type number}}, "en-US")
+				in
+				    Typed
+

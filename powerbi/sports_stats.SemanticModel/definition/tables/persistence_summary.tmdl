@@ -1,0 +1,70 @@
+table persistence_summary
+	lineageTag: f7831676-2870-45d7-acad-a4e44734f240
+
+	measure 'r goals/xG' = CALCULATE(MAX(persistence_summary[pearson_r]), persistence_summary[variable] = "goals_xg")
+		formatString: 0.00
+		lineageTag: 28c1247e-dc71-4dc0-a07b-b0f0793baf5e
+
+	measure 'r xG per 90' = CALCULATE(MAX(persistence_summary[pearson_r]), persistence_summary[variable] = "xg_90")
+		formatString: 0.00
+		lineageTag: d22c8993-87c2-4c75-b035-9f611641c3c2
+
+	column variable
+		dataType: string
+		lineageTag: f177f28f-a194-4452-bd90-0baf7aefea7f
+		summarizeBy: none
+		sourceColumn: variable
+
+	column n_pairs
+		dataType: int64
+		formatString: 0
+		lineageTag: 9e256271-b1e2-4a34-a3b6-57a410865a3f
+		summarizeBy: none
+		sourceColumn: n_pairs
+
+	column pearson_r
+		dataType: double
+		lineageTag: cdaa7fb3-88bf-454d-ac38-94d25e87f7bf
+		summarizeBy: sum
+		sourceColumn: pearson_r
+
+	column r_ci_low
+		dataType: double
+		lineageTag: df2f4086-5826-41a3-a387-564496fd567c
+		summarizeBy: sum
+		sourceColumn: r_ci_low
+
+	column r_ci_high
+		dataType: double
+		lineageTag: aa45eba6-dabb-4e7d-aa72-0219cbb2ee08
+		summarizeBy: sum
+		sourceColumn: r_ci_high
+
+	column spearman_rho
+		dataType: double
+		lineageTag: 74fa6a10-5fb8-48b7-bfb5-178899627090
+		summarizeBy: sum
+		sourceColumn: spearman_rho
+
+	column slope
+		dataType: double
+		lineageTag: fce12331-2a60-4989-8323-6ae2807613a1
+		summarizeBy: sum
+		sourceColumn: slope
+
+	column slope_se
+		dataType: double
+		lineageTag: b8a8e234-ad37-4b53-bb89-34d1079bb7bd
+		summarizeBy: sum
+		sourceColumn: slope_se
+
+	partition persistence_summary = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "persistence_summary.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"variable", type text}, {"n_pairs", Int64.Type}, {"pearson_r", type number}, {"r_ci_low", type number}, {"r_ci_high", type number}, {"spearman_rho", type number}, {"slope", type number}, {"slope_se", type number}}, "en-US")
+				in
+				    Typed
+

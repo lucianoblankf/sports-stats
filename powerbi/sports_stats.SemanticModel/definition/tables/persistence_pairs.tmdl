@@ -1,0 +1,64 @@
+table persistence_pairs
+	lineageTag: 5da00431-4c7a-4644-852e-34d8f767250e
+
+	column row_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 0f869b39-10f7-4a35-aba5-f338a95d4781
+		summarizeBy: none
+		sourceColumn: row_id
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 1105a40d-718f-40ba-a55f-b9fd4d5dbc9e
+		summarizeBy: none
+		sourceColumn: id
+
+	column player_name
+		dataType: string
+		lineageTag: 001c45b9-caa5-401d-9df1-2afb4e8118c9
+		summarizeBy: none
+		sourceColumn: player_name
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: 48415b14-78ca-43ff-aa21-ec9fe15cd319
+		summarizeBy: none
+		sourceColumn: year
+
+	column goals_xg_t
+		dataType: double
+		lineageTag: 552c92ea-3bd2-4ef5-88d5-8a68eb390cb3
+		summarizeBy: sum
+		sourceColumn: goals_xg_t
+
+	column goals_xg_t1
+		dataType: double
+		lineageTag: ea385e3e-6e41-4652-9835-f0076234d62e
+		summarizeBy: sum
+		sourceColumn: goals_xg_t1
+
+	column xg_90_t
+		dataType: double
+		lineageTag: 69bee568-bdd9-49b8-9b7b-43baca59ad1c
+		summarizeBy: sum
+		sourceColumn: xg_90_t
+
+	column xg_90_t1
+		dataType: double
+		lineageTag: e4fd33e0-07fb-47bd-ba53-35c86bfafa4f
+		summarizeBy: sum
+		sourceColumn: xg_90_t1
+
+	partition persistence_pairs = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "persistence_pairs.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"row_id", Int64.Type}, {"id", Int64.Type}, {"player_name", type text}, {"year", Int64.Type}, {"goals_xg_t", type number}, {"goals_xg_t1", type number}, {"xg_90_t", type number}, {"xg_90_t1", type number}}, "en-US")
+				in
+				    Typed
+

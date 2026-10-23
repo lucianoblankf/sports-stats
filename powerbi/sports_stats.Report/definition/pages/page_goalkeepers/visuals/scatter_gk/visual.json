@@ -1,0 +1,144 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "scatter_gk",
+  "position": {
+    "x": 440,
+    "y": 215,
+    "z": 0,
+    "height": 485,
+    "width": 440,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "scatterChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gk_seasons"
+                    }
+                  },
+                  "Property": "row_id"
+                }
+              },
+              "queryRef": "gk_seasons.row_id",
+              "nativeQueryRef": "row_id",
+              "active": true,
+              "displayName": "row_id"
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gk_seasons"
+                    }
+                  },
+                  "Property": "elite_group"
+                }
+              },
+              "queryRef": "gk_seasons.elite_group",
+              "nativeQueryRef": "elite_group",
+              "displayName": "elite_group"
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "gk_seasons"
+                        }
+                      },
+                      "Property": "xga"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(gk_seasons.xga)",
+              "nativeQueryRef": "xGA",
+              "active": true,
+              "displayName": "xGA"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "gk_seasons"
+                        }
+                      },
+                      "Property": "ga"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(gk_seasons.ga)",
+              "nativeQueryRef": "Goals conceded",
+              "displayName": "Goals conceded"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Goals conceded vs xGA (team-season)'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

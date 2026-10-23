@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/pagesMetadata/1.1.0/schema.json",
+  "pageOrder": [
+    "page_overview",
+    "page_selection",
+    "page_persistence",
+    "page_pca",
+    "page_goalkeepers"
+  ],
+  "activePageName": "page_goalkeepers"
+}

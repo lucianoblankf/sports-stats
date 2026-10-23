@@ -1,0 +1,37 @@
+table pca_variance
+	lineageTag: 70781c32-342d-4e65-8535-fea650c2a755
+
+	column component
+		dataType: string
+		lineageTag: b50dda78-51e9-4ffd-8586-b2c57e1a92fe
+		summarizeBy: none
+		sourceColumn: component
+
+	column eigenvalue
+		dataType: double
+		lineageTag: a5b62ac9-854d-4aa9-a5ff-6f8aa946ac50
+		summarizeBy: sum
+		sourceColumn: eigenvalue
+
+	column variance_pct
+		dataType: double
+		lineageTag: ebab87a0-0e92-4216-b9ea-76a1889c754b
+		summarizeBy: sum
+		sourceColumn: variance_pct
+
+	column cumulative_pct
+		dataType: double
+		lineageTag: 9d5ada13-1f62-4b0b-9af9-053ae024cc36
+		summarizeBy: sum
+		sourceColumn: cumulative_pct
+
+	partition pca_variance = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "pca_variance.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"component", type text}, {"eigenvalue", type number}, {"variance_pct", type number}, {"cumulative_pct", type number}}, "en-US")
+				in
+				    Typed
+

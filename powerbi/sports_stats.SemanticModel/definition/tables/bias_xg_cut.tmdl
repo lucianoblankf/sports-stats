@@ -1,0 +1,37 @@
+table bias_xg_cut
+	lineageTag: afcbbe9e-936b-44e7-867f-d66f57bb130b
+
+	measure 'Real mean (xG >= 5)' = CALCULATE(MAX(bias_xg_cut[real_mean]), bias_xg_cut[threshold] = 5)
+		formatString: 0.000
+		lineageTag: c0b4010d-2d01-414a-80fe-c5e01209c804
+
+	column threshold
+		dataType: int64
+		formatString: 0
+		lineageTag: 7e0bf330-6ab9-4d8c-aed0-dc4694bf4709
+		summarizeBy: none
+		sourceColumn: threshold
+
+	column n
+		dataType: int64
+		formatString: 0
+		lineageTag: 423b2db8-85d1-435d-84ba-d3702d6c9d6c
+		summarizeBy: none
+		sourceColumn: n
+
+	column real_mean
+		dataType: double
+		lineageTag: a711a889-96e1-4f89-b78f-4d94597e5d5d
+		summarizeBy: sum
+		sourceColumn: real_mean
+
+	partition bias_xg_cut = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "bias_xg_cut.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"threshold", Int64.Type}, {"n", Int64.Type}, {"real_mean", type number}}, "en-US")
+				in
+				    Typed
+

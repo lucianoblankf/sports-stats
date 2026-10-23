@@ -27,6 +27,10 @@ Open `Metodos_Estatisticos.Rproj` in RStudio and run `00_run_all.R` (or each scr
 | `12_persistence.R` | year-to-year persistence (skill vs luck) and next-season prediction |
 | `13_goalkeepers.R` | do elite goalkeepers concede fewer goals than xGA? |
 
+| `15_build_powerbi.R` | builds the Power BI project `powerbi/sports_stats.pbip` (5 pages) from the outputs |
+
+The Power BI project is generated as text (TMDL + PBIR), so it is versioned and reproducible. Open `powerbi/sports_stats.pbip` in Power BI Desktop and click Refresh. If the project folder moves, update the `DataFolder` parameter (Transform data > Edit parameters). The original `pbi_gols_xg.pbix` is kept untouched.
+
 The LaTeX write-up is `report/part2.tex` (upload the whole folder to Overleaf).
 
 Reusable functions live in `R/`. Outputs go to `tabs/` and `figs/`. Old code is kept in `legacy/` (original Portuguese version), and the original course materials are in `docs/`.

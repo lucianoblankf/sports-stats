@@ -1,0 +1,51 @@
+table gk_career
+	lineageTag: f305f4d4-6e73-465a-98d7-7ecac07d298f
+
+	column player_name
+		dataType: string
+		lineageTag: e5c8e82b-e5ee-4381-ab9b-4a5a21529f93
+		summarizeBy: none
+		sourceColumn: player_name
+
+	column seasons
+		dataType: int64
+		formatString: 0
+		lineageTag: 188258b3-37b3-4e23-8386-9ab15a5be5c9
+		summarizeBy: none
+		sourceColumn: seasons
+
+	column ga
+		dataType: int64
+		formatString: 0
+		lineageTag: d7fa5265-2143-41b4-b36a-4c978608e93d
+		summarizeBy: sum
+		sourceColumn: ga
+
+	column xga
+		dataType: double
+		lineageTag: e3749229-4337-472f-9f36-b3f2a0453ba2
+		summarizeBy: sum
+		sourceColumn: xga
+
+	column ga_xga
+		dataType: double
+		lineageTag: 898eedef-3d26-4e1f-a071-66903e421ff4
+		summarizeBy: sum
+		sourceColumn: ga_xga
+
+	column goals_prevented
+		dataType: double
+		lineageTag: aae35080-4614-493b-acdd-1241ffa7f565
+		summarizeBy: sum
+		sourceColumn: goals_prevented
+
+	partition gk_career = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "gk_career.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"player_name", type text}, {"seasons", Int64.Type}, {"ga", Int64.Type}, {"xga", type number}, {"ga_xga", type number}, {"goals_prevented", type number}}, "en-US")
+				in
+				    Typed
+

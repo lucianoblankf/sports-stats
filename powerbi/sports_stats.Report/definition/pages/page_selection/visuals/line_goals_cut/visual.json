@@ -1,0 +1,120 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "line_goals_cut",
+  "position": {
+    "x": 20,
+    "y": 215,
+    "z": 0,
+    "height": 485,
+    "width": 620,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "bias_goals_cut"
+                    }
+                  },
+                  "Property": "threshold"
+                }
+              },
+              "queryRef": "bias_goals_cut.threshold",
+              "nativeQueryRef": "threshold",
+              "active": true,
+              "displayName": "threshold"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "bias_goals_cut"
+                        }
+                      },
+                      "Property": "real_mean"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(bias_goals_cut.real_mean)",
+              "nativeQueryRef": "Real data",
+              "displayName": "Real data"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "bias_goals_cut"
+                        }
+                      },
+                      "Property": "simulated_mean"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(bias_goals_cut.simulated_mean)",
+              "nativeQueryRef": "Simulated (no skill)",
+              "displayName": "Simulated (no skill)"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Minimum-goals cutoff: mean goals/xG'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

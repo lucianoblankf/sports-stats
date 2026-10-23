@@ -1,0 +1,47 @@
+table bias_goals_cut
+	lineageTag: ac10c844-b31f-41a4-99de-040e3a7aab78
+
+	measure 'Real mean (10 goals)' = CALCULATE(MAX(bias_goals_cut[real_mean]), bias_goals_cut[threshold] = 10)
+		formatString: 0.000
+		lineageTag: 4c1cc821-4c4c-49cb-ac0f-5f6b74620dbf
+
+	measure 'Simulated mean (10 goals)' = CALCULATE(MAX(bias_goals_cut[simulated_mean]), bias_goals_cut[threshold] = 10)
+		formatString: 0.000
+		lineageTag: 25c23635-84f8-48dc-aae4-3b6887d0d676
+
+	column threshold
+		dataType: int64
+		formatString: 0
+		lineageTag: 25a822c9-70e2-4c91-abf2-ee617f2e859b
+		summarizeBy: none
+		sourceColumn: threshold
+
+	column n
+		dataType: int64
+		formatString: 0
+		lineageTag: 610c9daa-a54f-4347-aa30-5891a8b94837
+		summarizeBy: none
+		sourceColumn: n
+
+	column real_mean
+		dataType: double
+		lineageTag: 718838e7-f177-48ad-b588-2010816a1f2f
+		summarizeBy: sum
+		sourceColumn: real_mean
+
+	column simulated_mean
+		dataType: double
+		lineageTag: 3b5ee66e-7e77-4f26-a98b-bc93d17b6c19
+		summarizeBy: sum
+		sourceColumn: simulated_mean
+
+	partition bias_goals_cut = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "bias_goals_cut.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"threshold", Int64.Type}, {"n", Int64.Type}, {"real_mean", type number}, {"simulated_mean", type number}}, "en-US")
+				in
+				    Typed
+

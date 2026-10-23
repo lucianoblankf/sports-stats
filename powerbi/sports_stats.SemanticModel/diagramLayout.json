@@ -1,0 +1,152 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 38
+          },
+          "nodeIndex": "bias_goals_cut",
+          "nodeLineageTag": "ac10c844-b31f-41a4-99de-040e3a7aab78",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 284,
+            "y": 62
+          },
+          "nodeIndex": "bias_xg_cut",
+          "nodeLineageTag": "afcbbe9e-936b-44e7-867f-d66f57bb130b",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 568,
+            "y": 14
+          },
+          "nodeIndex": "career_index",
+          "nodeLineageTag": "7a40a7cc-ec5f-470c-ba3c-756b15b379c9",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 852,
+            "y": 38
+          },
+          "nodeIndex": "gk_career",
+          "nodeLineageTag": "f305f4d4-6e73-465a-98d7-7ecac07d298f",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1136,
+            "y": 0
+          },
+          "nodeIndex": "gk_seasons",
+          "nodeLineageTag": "efeb4fda-a3d9-4135-b0f2-09b399d4de8f",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1420,
+            "y": 50
+          },
+          "nodeIndex": "pca_loadings",
+          "nodeLineageTag": "4a884c57-c97e-41bd-a5dd-07bde5313bc4",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1704,
+            "y": 62
+          },
+          "nodeIndex": "pca_variance",
+          "nodeLineageTag": "70781c32-342d-4e65-8535-fea650c2a755",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1988,
+            "y": 14
+          },
+          "nodeIndex": "persistence_pairs",
+          "nodeLineageTag": "5da00431-4c7a-4644-852e-34d8f767250e",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2272,
+            "y": 0
+          },
+          "nodeIndex": "persistence_summary",
+          "nodeLineageTag": "f7831676-2870-45d7-acad-a4e44734f240",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2556,
+            "y": 0
+          },
+          "nodeIndex": "player_seasons",
+          "nodeLineageTag": "700a0a44-6a71-46bb-9ea8-b22c97c8f9b3",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}

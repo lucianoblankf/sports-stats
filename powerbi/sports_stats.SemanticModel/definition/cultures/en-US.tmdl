@@ -1,0 +1,557 @@
+cultureInfo en-US
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "player_seasons.player_seasons": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "player_seasons",
+			          "ConceptualProperty": "Player seasons"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Player seasons": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "player_seasons.goals_xg_total": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "player_seasons",
+			          "ConceptualProperty": "Goals/xG (total)"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Goals/xG (total)": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "player_seasons.mean_xg_per_90": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "player_seasons",
+			          "ConceptualProperty": "Mean xG per 90"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Mean xG per 90": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "player_seasons.league": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "player_seasons",
+			          "ConceptualProperty": "league"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "league": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "player_seasons.mean_goals_xg": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "player_seasons",
+			          "ConceptualProperty": "Mean goals/xG"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Mean goals/xG": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "player_seasons.season": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "player_seasons",
+			          "ConceptualProperty": "season"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "season": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "player_seasons.row_id": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "player_seasons",
+			          "ConceptualProperty": "row_id"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "row_id": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "bias_goals_cut.real_mean_10_goals": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "bias_goals_cut",
+			          "ConceptualProperty": "Real mean (10 goals)"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Real mean (10 goals)": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "bias_goals_cut.simulated_mean_10_goals": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "bias_goals_cut",
+			          "ConceptualProperty": "Simulated mean (10 goals)"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Simulated mean (10 goals)": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "bias_goals_cut.threshold": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "bias_goals_cut",
+			          "ConceptualProperty": "threshold"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "threshold": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "bias_xg_cut.real_mean_xg__5": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "bias_xg_cut",
+			          "ConceptualProperty": "Real mean (xG >= 5)"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Real mean (xG >= 5)": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "bias_xg_cut.threshold": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "bias_xg_cut",
+			          "ConceptualProperty": "threshold"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "threshold": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "persistence_summary.variable": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "persistence_summary",
+			          "ConceptualProperty": "variable"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "variable": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "persistence_summary.r_goals_xg": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "persistence_summary",
+			          "ConceptualProperty": "r goals/xG"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "r goals/xG": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "persistence_summary.r_xg_per_90": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "persistence_summary",
+			          "ConceptualProperty": "r xG per 90"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "r xG per 90": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "persistence_pairs.row_id": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "persistence_pairs",
+			          "ConceptualProperty": "row_id"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "row_id": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "pca_variance.component": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "pca_variance",
+			          "ConceptualProperty": "component"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "component": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "career_index.player_name": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "career_index",
+			          "ConceptualProperty": "player_name"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Player": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "pca_loadings.variable": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "pca_loadings",
+			          "ConceptualProperty": "variable"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Metric": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "gk_seasons.elite_mean_ga_xga": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "gk_seasons",
+			          "ConceptualProperty": "Elite mean ga/xGA"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Elite mean ga/xGA": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "gk_seasons.teamseasons": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "gk_seasons",
+			          "ConceptualProperty": "Team-seasons"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Team-seasons": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "gk_seasons.other_mean_ga_xga": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "gk_seasons",
+			          "ConceptualProperty": "Other mean ga/xGA"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Other mean ga/xGA": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "gk_seasons.elite_group": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "gk_seasons",
+			          "ConceptualProperty": "elite_group"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "elite_group": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "gk_seasons.mean_ga_xga": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "gk_seasons",
+			          "ConceptualProperty": "Mean ga/xGA"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Mean ga/xGA": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "gk_seasons.row_id": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "gk_seasons",
+			          "ConceptualProperty": "row_id"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "row_id": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "gk_career.player_name": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "gk_career",
+			          "ConceptualProperty": "player_name"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Goalkeeper": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

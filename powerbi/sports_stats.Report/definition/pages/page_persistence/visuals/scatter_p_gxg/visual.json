@@ -1,0 +1,125 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "scatter_p_gxg",
+  "position": {
+    "x": 660,
+    "y": 90,
+    "z": 0,
+    "height": 300,
+    "width": 600,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "scatterChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "persistence_pairs"
+                    }
+                  },
+                  "Property": "row_id"
+                }
+              },
+              "queryRef": "persistence_pairs.row_id",
+              "nativeQueryRef": "row_id",
+              "active": true,
+              "displayName": "row_id"
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "persistence_pairs"
+                        }
+                      },
+                      "Property": "goals_xg_t"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(persistence_pairs.goals_xg_t)",
+              "nativeQueryRef": "Goals/xG, season t",
+              "active": true,
+              "displayName": "Goals/xG, season t"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "persistence_pairs"
+                        }
+                      },
+                      "Property": "goals_xg_t1"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(persistence_pairs.goals_xg_t1)",
+              "nativeQueryRef": "Goals/xG, season t+1",
+              "displayName": "Goals/xG, season t+1"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Goals/xG persists weakly'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
